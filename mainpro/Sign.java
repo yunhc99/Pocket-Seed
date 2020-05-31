@@ -16,38 +16,29 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Login extends JFrame{
-	
+public class Sign extends JFrame{
 	private Image screenImage;// 이미지를 담는거
 	private Graphics screenGraphic;
 	
-	private Image Background = new ImageIcon(Main.class.getResource("../image/LoginBack.png")).getImage();
+	private Image Background = new ImageIcon(Main.class.getResource("../image/SignBack.png")).getImage();
 	private JLabel meunBar = new JLabel(new ImageIcon(Main.class.getResource("../image/menuBar.png")));
 	
+	private ImageIcon SignButtonImage = new ImageIcon(Main.class.getResource("../image/SignButton.png"));
+	private ImageIcon SignButtonEnterImage = new ImageIcon(Main.class.getResource("../image/SignButtonEnter.png"));
 	
-	private ImageIcon LoginButtonBasicImage = new ImageIcon(Main.class.getResource("../image/LoginButtonBasic.png"));
-	private ImageIcon LoginButtonEnterImage = new ImageIcon(Main.class.getResource("../image/LoginButtonEnter.png"));
-	private ImageIcon SignUpButtonImage = new ImageIcon(Main.class.getResource("../image/SignUpButton.png"));
+	private JButton SignButton =new JButton(SignButtonImage);
 	
-	
-	private JButton LoginButton =new JButton(LoginButtonBasicImage);
-	private JButton SignUpButton =new JButton(SignUpButtonImage);
-	
-	private Font fon1 = new Font("굴림", Font.PLAIN, 30);
+	private Font fon1 = new Font("굴림", Font.PLAIN, 45);
 	
 	private JTextField TFId =new JTextField();
 	private JPasswordField TFPass =new JPasswordField();
 	
-
-	
 	private int mouseX, mouseY;	
 	
-	
-	
-	public Login() {
+	public Sign() {
 		setUndecorated(true);// 실행시 메뉴바 안보이기
 		setTitle("Test");
-		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+		setSize(600 ,615);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,26 +63,26 @@ public class Login extends JFrame{
 				setLocation(x-mouseX, y-mouseY);
 			}
 		});
-		add(meunBar);	
+		add(meunBar);
 		
-		LoginButton.setBounds(25, 800, 550, 60);//위치 지정
-		LoginButton.setBorderPainted(false);
-		LoginButton.setContentAreaFilled(false);
-		LoginButton.setFocusPainted(false);
-		LoginButton.addMouseListener(new MouseAdapter() {
+		SignButton.setBounds(50, 525, 500, 69);
+		SignButton.setBorderPainted(false);
+		SignButton.setContentAreaFilled(false);
+		SignButton.setFocusPainted(false);
+		SignButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				LoginButton.setIcon(LoginButtonEnterImage);
-				LoginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
+				SignButton.setIcon(SignButtonEnterImage);
+				SignButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
-				LoginButton.setIcon(LoginButtonBasicImage);
-				LoginButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
+				SignButton.setIcon(SignButtonImage);
+				SignButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("로그인 기능\n");
+				System.out.print("회원가입 기능\n");
 				//패스워드 보안상 변환과정
 				String pw = "";
 				char[] secret_pw=TFPass.getPassword();//필드에서 패스워드를 얻어옴, char[] 배열에 저장
@@ -107,38 +98,18 @@ public class Login extends JFrame{
 				TFPass.setText("");
 			}
 		});
-		add(LoginButton);
+		add(SignButton);
 		
-		SignUpButton.setBounds(370, 530, 150, 56);
-		SignUpButton.setBorderPainted(false);
-		SignUpButton.setContentAreaFilled(false);
-		SignUpButton.setFocusPainted(false);
-		SignUpButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				SignUpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
-			}
-			@Override
-			public void mouseExited(MouseEvent e){
-				SignUpButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
-			}
-			@Override
-			public void mousePressed(MouseEvent e){
-				System.out.print("회원가입 기능\n");
-			}
-		});
-		add(SignUpButton);
-		
-		
-		TFId.setBounds(65,605,470,45);
+		TFId.setBounds(55, 260, 490, 70);
 		TFId.setFont(fon1);
 		add(TFId);
 		
-		TFPass.setBounds(65,715,470,45);
+		TFPass.setBounds(55, 425, 490, 70);
 		TFPass.setFont(fon1);
+		TFPass.setEchoChar('*');
 		add(TFPass);
-		
 	}
+	
 	public void paint(Graphics g) {
 		screenImage = createImage(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		screenGraphic = screenImage.getGraphics();
@@ -152,4 +123,5 @@ public class Login extends JFrame{
 		paintComponents(g);// 컴포넌트 프린트 J라벨을 그리기
 		this.repaint();
 	}
+	
 }
