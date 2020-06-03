@@ -1,5 +1,6 @@
 package mainpro;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -13,10 +14,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 
 public class SubList extends JFrame{
 	
@@ -38,7 +39,9 @@ public class SubList extends JFrame{
 	private JButton NextButton= new JButton(NextButtonImage);
 	
 	private JTextField AddSubTF= new JTextField();
-	private JTextArea SubListA= new JTextArea(25,80);
+	private JTextArea SubListA= new JTextArea();
+	private JScrollPane scroll=new JScrollPane(SubListA);
+	
 	
 	private Font fon1 = new Font("±¼¸²", Font.PLAIN, 35);
 	private Font fon2 = new Font("±¼¸²", Font.PLAIN, 30);
@@ -104,7 +107,9 @@ public class SubList extends JFrame{
 		
 		SubListA.setBounds(40, 420, 525, 305);
 		SubListA.setFont(fon2);
-		add(SubListA);
+		scroll.setBounds(40, 420, 525, 305);
+		add(scroll);
+		
 		
 		DeleteButton.setBounds(430, 750, 135, 40);
 		DeleteButton.setBorderPainted(false);
