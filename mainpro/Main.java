@@ -9,6 +9,7 @@ public class Main {
 		//new Login();
 		//new Sign();
 		//new SubList();
-		new ConditionIN();
+		//new ConditionIN();
+		new Outcome();
 	}
 }

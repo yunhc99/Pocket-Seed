@@ -108,7 +108,7 @@ public class ConditionIN extends JFrame{
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("다음으로 기능\n");
+				System.out.print("필수과목 기능\n");
 			}
 		});
 		add(NecessarySubButton);
@@ -130,7 +130,7 @@ public class ConditionIN extends JFrame{
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("다음으로 기능\n");
+				System.out.print("선택과목 기능\n");
 			}
 		});
 		add(SelectSubButton);
@@ -152,7 +152,7 @@ public class ConditionIN extends JFrame{
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("다음으로 기능\n");
+				System.out.print("검색 기능\n");
 			}
 		});
 		add(EndSeachButton);
@@ -174,7 +174,7 @@ public class ConditionIN extends JFrame{
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("다음으로 기능\n");
+				System.out.print("뒤로 기능\n");
 			}
 		});
 		add(BackButton);
