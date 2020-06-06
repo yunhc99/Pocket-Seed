@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 
 public class SubList extends JFrame{
 	
-	// ±×¸² Å©±â ¼³Á¤ °ª
+	// ê·¸ë¦¼ í¬ê¸° ì„¤ì • ê°’
 	int P_D_button_Weight = 90;
 	int P_D_button_High = 30;
 	int Next_button_Weight = 130;
@@ -29,7 +29,7 @@ public class SubList extends JFrame{
 	
 	//
 	
-	private Image screenImage;// ÀÌ¹ÌÁö¸¦ ´ã´Â°Å
+	private Image screenImage;// ì´ë¯¸ì§€ë¥¼ ë‹´ëŠ”ê±°
 	private Graphics screenGraphic;
 	
 	private Image Background = new ImageIcon(Main.class.getResource("../image/SubListBack.png")).getImage();
@@ -43,7 +43,7 @@ public class SubList extends JFrame{
 	private ImageIcon NextButtonEnterImage = new ImageIcon(Main.class.getResource("../image/SubListNextButtonEnter.png"));
 	
 	
-	// ÀÌ¹ÌÁö Å©±â º¯È¯
+	// ì´ë¯¸ì§€ í¬ê¸° ë³€í™˜
 	Image ADD = AddButtonImage.getImage();
 	Image changeImgA = ADD.getScaledInstance(P_D_button_Weight, P_D_button_High, Image.SCALE_SMOOTH);
 	ImageIcon ADD_ButtonImage = new ImageIcon(changeImgA);
@@ -78,20 +78,20 @@ public class SubList extends JFrame{
 	private JScrollPane scroll=new JScrollPane(SubListA);
 	
 	
-	private Font fon1 = new Font("±¼¸²", Font.PLAIN, 35);
-	private Font fon2 = new Font("±¼¸²", Font.PLAIN, 30);
+	private Font fon1 = new Font("êµ´ë¦¼", Font.PLAIN, 35);
+	private Font fon2 = new Font("êµ´ë¦¼", Font.PLAIN, 30);
 	
 	private int mouseX, mouseY;	
 	
 	public SubList() {
-		setUndecorated(true);// ½ÇÇà½Ã ¸Ş´º¹Ù ¾Èº¸ÀÌ±â
+		setUndecorated(true);// ì‹¤í–‰ì‹œ ë©”ë‰´ë°” ì•ˆë³´ì´ê¸°
 		setTitle("Test");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setBackground(new Color(0, 0, 0, 0)); // ÄÄÆ÷³ÍÆ®ÀÇ ¹è°æÀÌ ÇÏ¾á»ö
+		setBackground(new Color(0, 0, 0, 0)); // ì»´í¬ë„ŒíŠ¸ì˜ ë°°ê²½ì´ í•˜ì–€ìƒ‰
 		setLayout(null);
 		
 		meunBar.setBounds(0, 0, 600, 30);
@@ -113,7 +113,7 @@ public class SubList extends JFrame{
 		});
 		add(meunBar);
 		
-		// Ãß°¡ ¹öÆ° °ü¸®
+		// ì¶”ê°€ ë²„íŠ¼ ê´€ë¦¬
 		AddButton.setBounds(470, 290, P_D_button_Weight, P_D_button_High);
 		AddButton.setBorderPainted(false);
 		AddButton.setContentAreaFilled(false);
@@ -122,16 +122,16 @@ public class SubList extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				AddButton.setIcon(ADD_ButtonImage_E);
-				AddButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				AddButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				AddButton.setIcon(ADD_ButtonImage);
-				AddButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				AddButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("°ú¸ñÃß°¡ ±â´É\n");
+				System.out.print("ê³¼ëª©ì¶”ê°€ ê¸°ëŠ¥\n");
 			}
 		});
 		add(AddButton);
@@ -146,7 +146,7 @@ public class SubList extends JFrame{
 		scroll.setBounds(40, 420, 525, 305);
 		add(scroll);
 		
-		// »èÁ¦ ¹öÆ° °ü¸®
+		// ì‚­ì œ ë²„íŠ¼ ê´€ë¦¬
 		DeleteButton.setBounds(470, 750, P_D_button_Weight, P_D_button_High);
 		DeleteButton.setBorderPainted(false);
 		DeleteButton.setContentAreaFilled(false);
@@ -155,22 +155,22 @@ public class SubList extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				DeleteButton.setIcon(DELETE_ButtonImage_E);
-				DeleteButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				DeleteButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				DeleteButton.setIcon(DELETE_ButtonImage);
-				DeleteButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				DeleteButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("°ú¸ñ»èÁ¦ ±â´É\n");
+				System.out.print("ê³¼ëª©ì‚­ì œ ê¸°ëŠ¥\n");
 			}
 		});
 		add(DeleteButton);
 		//
 		
-		// ´ÙÀ½ ¹öÆ° °ü¸®
+		// ë‹¤ìŒ ë²„íŠ¼ ê´€ë¦¬
 		NextButton.setBounds(430, 820, Next_button_Weight, Next_button_High);
 		NextButton.setBorderPainted(false);
 		NextButton.setContentAreaFilled(false);
@@ -179,16 +179,16 @@ public class SubList extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				NextButton.setIcon(NEXT_ButtonImage_E);
-				NextButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				NextButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				NextButton.setIcon(NEXT_ButtonImage);
-				NextButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				NextButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("´ÙÀ½À¸·Î ±â´É\n");
+				System.out.print("ë‹¤ìŒìœ¼ë¡œ ê¸°ëŠ¥\n");
 			}
 		});
 		add(NextButton);
@@ -205,10 +205,10 @@ public class SubList extends JFrame{
 		g.drawImage(screenImage, 0, 0, null);
 	}
 
-	// »õ·Î°íÄ§
+	// ìƒˆë¡œê³ ì¹¨
 	public void screenDraw(Graphics g) {
-		g.drawImage(Background, 0, 0, null);// ÀÌ¹ÌÁö±×¸®±â
-		paintComponents(g);// ÄÄÆ÷³ÍÆ® ÇÁ¸°Æ® J¶óº§À» ±×¸®±â
+		g.drawImage(Background, 0, 0, null);// ì´ë¯¸ì§€ê·¸ë¦¬ê¸°
+		paintComponents(g);// ì»´í¬ë„ŒíŠ¸ í”„ë¦°íŠ¸ Jë¼ë²¨ì„ ê·¸ë¦¬ê¸°
 		this.repaint();
 	}
 	

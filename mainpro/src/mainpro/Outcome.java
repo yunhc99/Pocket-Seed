@@ -22,54 +22,54 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class Outcome extends JFrame{
-	private Image screenImage;// �̹����� ���°�
+	private Image screenImage;// 이미지를 담는거
 	private Graphics screenGraphic;
-
+	
 	private Image Background = new ImageIcon(Main.class.getResource("../image/OutcomeBack.png")).getImage();
 	private JLabel meunBar = new JLabel(new ImageIcon(Main.class.getResource("../image/menuBar.png")));
-
+	
 	private ImageIcon BackButtonImage = new ImageIcon(Main.class.getResource("../image/OutcomeBackButton.png"));
 	private ImageIcon BackButtonEnterImage = new ImageIcon(Main.class.getResource("../image/OutcomeBackButtonEnter.png"));
 	private ImageIcon SaveButtonImage = new ImageIcon(Main.class.getResource("../image/OutcomeSaveButton.png"));
 	private ImageIcon SaveButtonEnterImage = new ImageIcon(Main.class.getResource("../image/OutcomeSaveButtonEnter.png"));
 	private ImageIcon ExitButtonImage = new ImageIcon(Main.class.getResource("../image/OutcomeExitButton.png"));
 	private ImageIcon ExitButtonEnterImage = new ImageIcon(Main.class.getResource("../image/OutcomeExitButtonEnter.png"));
-
+	
 	private ImageIcon RightButtonImage = new ImageIcon(Main.class.getResource("../image/OutcomeRightButton.png"));
 	private ImageIcon LeftButtonImage = new ImageIcon(Main.class.getResource("../image/OutcomeLeftButton.png"));
-
+	
 	private JButton BackButton= new JButton(BackButtonImage);
 	private JButton SaveButton= new JButton(SaveButtonImage);
 	private JButton ExitButton= new JButton(ExitButtonImage);
 	private JButton RightButton= new JButton(RightButtonImage);
 	private JButton LeftButton= new JButton(LeftButtonImage);
-
-
-	String header[]= {"����", "��", "ȭ","��","��","��"};
+	
+	
+	String header[]= {"교시", "월", "화","수","목","금"};
 	String contect[][]= {
-			{"1","��","��","Ʈ","��","��"},
-			{"2","��","��","Ʈ","��","��"},
-			{"3","��","��","Ʈ","��","��"}
+			{"1","테","스","트","용","입"},
+			{"2","테","스","트","용","입"},
+			{"3","테","스","트","용","입"}
 	};
-
+	
 	DefaultTableModel model = new DefaultTableModel(contect,header);
 	private JTable SubS=new JTable(model);
 	private JScrollPane TabelS= new JScrollPane(SubS);
-
-
+	
+	
 	private int mouseX, mouseY;
-
+	
 	public Outcome() {
-		setUndecorated(true);// ������ �޴��� �Ⱥ��̱�
+		setUndecorated(true);// 실행시 메뉴바 안보이기
 		setTitle("Test");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setBackground(new Color(0, 0, 0, 0)); // ������Ʈ�� ������ �Ͼ���
+		setBackground(new Color(0, 0, 0, 0)); // 컴포넌트의 배경이 하얀색
 		setLayout(null);
-
+		
 		meunBar.setBounds(0, 0, 600, 30);
 		meunBar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -77,7 +77,7 @@ public class Outcome extends JFrame{
 				mouseX= e.getX();
 				mouseY= e.getY();
 			}
-
+			
 		});
 		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -88,7 +88,7 @@ public class Outcome extends JFrame{
 			}
 		});
 		add(meunBar);
-
+		
 		RightButton.setBounds(325, 558, 90, 70);
 		RightButton.setBorderPainted(false);
 		RightButton.setContentAreaFilled(false);
@@ -97,20 +97,20 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				//RightButton.setIcon(RightButtonEnterImage);
-				RightButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//�հ��� Ŀ��
+				RightButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				//RightButton.setIcon(RightButtonImage);
-				RightButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//�⺻ Ŀ��
+				RightButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("������ ����\n");
+				System.out.print("오른쪽 기능\n");
 			}
 		});
 		add(RightButton);
-
+		
 		LeftButton.setBounds(182, 558, 90, 70);
 		LeftButton.setBorderPainted(false);
 		LeftButton.setContentAreaFilled(false);
@@ -119,20 +119,20 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				//RightButton.setIcon(RightButtonEnterImage);
-				LeftButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//�հ��� Ŀ��
+				LeftButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				//RightButton.setIcon(RightButtonImage);
-				LeftButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//�⺻ Ŀ��
+				LeftButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("���� ����\n");
+				System.out.print("왼쪽 기능\n");
 			}
 		});
 		add(LeftButton);
-
+		
 		BackButton.setBounds(40, 820, 160, 45);
 		BackButton.setBorderPainted(false);
 		BackButton.setContentAreaFilled(false);
@@ -141,20 +141,20 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				BackButton.setIcon(BackButtonEnterImage);
-				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//�հ��� Ŀ��
+				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				BackButton.setIcon(BackButtonImage);
-				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//�⺻ Ŀ��
+				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("�ڷΰ��� ����\n");
+				System.out.print("뒤로가기 기능\n");
 			}
 		});
 		add(BackButton);
-
+		
 		SaveButton.setBounds(220, 820, 160, 45);
 		SaveButton.setBorderPainted(false);
 		SaveButton.setContentAreaFilled(false);
@@ -163,20 +163,20 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				SaveButton.setIcon(SaveButtonEnterImage);
-				SaveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//�հ��� Ŀ��
+				SaveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				SaveButton.setIcon(SaveButtonImage);
-				SaveButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//�⺻ Ŀ��
+				SaveButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("���� ����\n");
+				System.out.print("저장 기능\n");
 			}
 		});
 		add(SaveButton);
-
+		
 		ExitButton.setBounds(400, 820, 160, 45);
 		ExitButton.setBorderPainted(false);
 		ExitButton.setContentAreaFilled(false);
@@ -185,12 +185,12 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				ExitButton.setIcon(ExitButtonEnterImage);
-				ExitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//�հ��� Ŀ��
+				ExitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				ExitButton.setIcon(ExitButtonImage);
-				ExitButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//�⺻ Ŀ��
+				ExitButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
@@ -198,12 +198,12 @@ public class Outcome extends JFrame{
 			}
 		});
 		add(ExitButton);
-
+		
 		TabelS.setBounds(35, 205, 530, 340);
 		SubS.setBounds(35, 205, 530, 340);
 		add(TabelS);
 	}
-
+	
 	public void paint(Graphics g) {
 		screenImage = createImage(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		screenGraphic = screenImage.getGraphics();
@@ -211,10 +211,10 @@ public class Outcome extends JFrame{
 		g.drawImage(screenImage, 0, 0, null);
 	}
 
-	// ���ΰ�ħ
+	// 새로고침
 	public void screenDraw(Graphics g) {
-		g.drawImage(Background, 0, 0, null);// �̹����׸���
-		paintComponents(g);// ������Ʈ ����Ʈ J������ �׸���
+		g.drawImage(Background, 0, 0, null);// 이미지그리기
+		paintComponents(g);// 컴포넌트 프린트 J라벨을 그리기
 		this.repaint();
 	}
 
