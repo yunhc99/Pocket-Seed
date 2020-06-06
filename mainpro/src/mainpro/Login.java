@@ -5,6 +5,8 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -18,64 +20,64 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 public class Login extends JFrame{
-
-	private Image screenImage;// ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½
+	
+	private Image screenImage;// ÀÌ¹ÌÁö¸¦ ´ã´Â°Å
 	private Graphics screenGraphic;
-
+	
 	private Image Background = new ImageIcon(Main.class.getResource("../image/LoginBack.png")).getImage();
 	private JLabel meunBar = new JLabel(new ImageIcon(Main.class.getResource("../image/menuBar.png")));
-
-
+	
+	
 	private ImageIcon LoginButtonBasicImage = new ImageIcon(Main.class.getResource("../image/LoginButtonBasic.png"));
 	private ImageIcon LoginButtonEnterImage = new ImageIcon(Main.class.getResource("../image/LoginButtonEnter.png"));
 	private ImageIcon SignUpButtonImage = new ImageIcon(Main.class.getResource("../image/SignUpButton.png"));
-
-
-	// ï¿½Ì¹ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½È¯
+	
+	
+	// ÀÌ¹ÌÁö Å©±â º¯È¯
 	Image LoginB = LoginButtonBasicImage.getImage();
 	Image changeImgB = LoginB.getScaledInstance(480, 50, Image.SCALE_SMOOTH);
 	ImageIcon LoginButtonBasicImage_c = new ImageIcon(changeImgB);
-
+	
 	Image LoginE = LoginButtonEnterImage.getImage();
 	Image changeImgE = LoginE.getScaledInstance(480, 50, Image.SCALE_SMOOTH);
 	ImageIcon LoginButtonEnterImage_E = new ImageIcon(changeImgE);
-
+	
 	private JButton LoginButton =new JButton(LoginButtonBasicImage_c);
 	private JButton SignUpButton =new JButton(SignUpButtonImage);
 	//
+	
 
-
-	private Font fon1 = new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 30);
-
-
-	private JTextField TFId =new JTextField(){
-		public void setBorder(Border border) { // textfieldï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×µÎ¸ï¿½ ï¿½ï¿½ï¿½ï¿½È­
-
+	private Font fon1 = new Font("±¼¸²", Font.PLAIN, 30);
+	
+	
+	private JTextField TFId =new JTextField(){ 
+		public void setBorder(Border border) { // textfield¿¡ ´ëÇÑ Å×µÎ¸® Åõ¸íÈ­
+			
 		}
 	};
-	private JPasswordField TFPass =new JPasswordField(){
-		public void setBorder(Border border) { // textfieldï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×µÎ¸ï¿½ ï¿½ï¿½ï¿½ï¿½È­
-
+	private JPasswordField TFPass =new JPasswordField(){ 
+		public void setBorder(Border border) { // textfield¿¡ ´ëÇÑ Å×µÎ¸® Åõ¸íÈ­
+			
 		}
 	};
+	
 
-
-
-	private int mouseX, mouseY;
-
-
-
+	
+	private int mouseX, mouseY;	
+	
+	
+	
 	public Login() {
-		setUndecorated(true);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½Èºï¿½ï¿½Ì±ï¿½
+		setUndecorated(true);// ½ÇÇà½Ã ¸Þ´º¹Ù ¾Èº¸ÀÌ±â
 		setTitle("Test");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setBackground(new Color(0, 0, 0, 0)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¾ï¿½ï¿½ï¿½
+		setBackground(new Color(0, 0, 0, 0)); // ÄÄÆ÷³ÍÆ®ÀÇ ¹è°æÀÌ ÇÏ¾á»ö
 		setLayout(null);
-
+		
 		meunBar.setBounds(0, 0, 600, 30);
 		meunBar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -83,7 +85,7 @@ public class Login extends JFrame{
 				mouseX= e.getX();
 				mouseY= e.getY();
 			}
-
+			
 		});
 		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -93,9 +95,9 @@ public class Login extends JFrame{
 				setLocation(x-mouseX, y-mouseY);
 			}
 		});
-		add(meunBar);
-
-		LoginButton.setBounds(60, 800, 480, 50);//ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
+		add(meunBar);	
+		
+		LoginButton.setBounds(60, 800, 480, 50);//À§Ä¡ ÁöÁ¤
 		LoginButton.setBorderPainted(false);
 		LoginButton.setContentAreaFilled(false);
 		LoginButton.setFocusPainted(false);
@@ -103,33 +105,34 @@ public class Login extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				LoginButton.setIcon(LoginButtonEnterImage_E);
-				LoginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
+				LoginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				LoginButton.setIcon(LoginButtonBasicImage_c);
-				LoginButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
+				LoginButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
-				//ï¿½Ð½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½È»ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½
+				System.out.print("·Î±×ÀÎ ±â´É\n");
+				//ÆÐ½º¿öµå º¸¾È»ó º¯È¯°úÁ¤
 				String pw = "";
-				char[] secret_pw=TFPass.getPassword();//ï¿½Êµå¿¡ï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, char[] ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-				for(char cha : secret_pw){ //secret_pw ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½Å­ forï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½é¼­ chaï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¾ï¿½ ï¿½ï¿½ï¿½ï¿½
+				char[] secret_pw=TFPass.getPassword();//ÇÊµå¿¡¼­ ÆÐ½º¿öµå¸¦ ¾ò¾î¿È, char[] ¹è¿­¿¡ ÀúÀå
+				for(char cha : secret_pw){ //secret_pw ¹è¿­¿¡ ÀúÀåµÈ ¾ÏÈ£ÀÇ ÀÚ¸´¼ö ¸¸Å­ for¹® µ¹¸®¸é¼­ cha¿¡ ÇÑ ±ÛÀÚ¾¿ ÀúÀå
 					Character.toString(cha);
-					//pw ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½, pw ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¾î¼­ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½×¿ï¿½ï¿½ï¿½ï¿½ï¿½
+					//pw ¿¡ ÀúÀåÇÏ±â, pw ¿¡ °ªÀÌ ºñ¾îÀÖÀ¸¸é ÀúÀå, °ªÀÌ ÀÖÀ¸¸é ÀÌ¾î¼­ ÀúÀåÇÏ´Â »ïÇ×¿¬»êÀÚ
 					pw += (pw.equals("")) ? ""+cha+"" : ""+cha+"";
 				}
-
-				System.out.print(TFId.getText()+"\n");
+				
+				System.out.print(TFId.getText()+"\n");	
 				System.out.print(pw + "\n");
 				TFId.setText("");
 				TFPass.setText("");
 			}
 		});
 		add(LoginButton);
-
+	    LoginButton.addActionListener(new action()); // ·Î±×ÀÎ ¹öÆ° ¾×¼Ç ÀÌº¥Æ® ºÎ¿©
+		
 		SignUpButton.setBounds(420, 565, 100, 40);
 		SignUpButton.setBorderPainted(false);
 		SignUpButton.setContentAreaFilled(false);
@@ -137,28 +140,28 @@ public class Login extends JFrame{
 		SignUpButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				SignUpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
+				SignUpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
-				SignUpButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
+				SignUpButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
+				System.out.print("È¸¿ø°¡ÀÔ ±â´É\n");
 			}
 		});
 		add(SignUpButton);
-
-
+		SignUpButton.addActionListener(new action()); // È¸¿ø°¡ÀÔ ¹öÆ° ¾×¼Ç ÀÌº¥Æ® ºÎ¿©
+		 
 		TFId.setBounds(65,605,470,45);
 		TFId.setFont(fon1);
 		add(TFId);
-
+		
 		TFPass.setBounds(65,715,470,45);
 		TFPass.setFont(fon1);
 		add(TFPass);
-
+		
 	}
 	public void paint(Graphics g) {
 		screenImage = createImage(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
@@ -167,10 +170,23 @@ public class Login extends JFrame{
 		g.drawImage(screenImage, 0, 0, null);
 	}
 
-	// ï¿½ï¿½ï¿½Î°ï¿½Ä§
+	// »õ·Î°íÄ§
 	public void screenDraw(Graphics g) {
-		g.drawImage(Background, 0, 0, null);// ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½
-		paintComponents(g);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ® Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
+		g.drawImage(Background, 0, 0, null);// ÀÌ¹ÌÁö±×¸®±â
+		paintComponents(g);// ÄÄÆ÷³ÍÆ® ÇÁ¸°Æ® J¶óº§À» ±×¸®±â
 		this.repaint();
 	}
+	
+	public class action implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+if(e.getSource()==SignUpButton) {
+	new Sign();
+	dispose();
+}
+		}
+		
+	}
+	
 }

@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 public class Sign extends JFrame{
 	private Image screenImage;// 이미지를 담는거
@@ -26,19 +27,42 @@ public class Sign extends JFrame{
 	private ImageIcon SignButtonImage = new ImageIcon(Main.class.getResource("../image/SignButton.png"));
 	private ImageIcon SignButtonEnterImage = new ImageIcon(Main.class.getResource("../image/SignButtonEnter.png"));
 	
-	private JButton SignButton =new JButton(SignButtonImage);
 	
-	private Font fon1 = new Font("굴림", Font.PLAIN, 45);
+	// 이미지 크기 변환
+		Image Sign_B = SignButtonImage.getImage();
+		Image changeImgB = Sign_B.getScaledInstance(330, 45, Image.SCALE_SMOOTH);
+		ImageIcon SignButtonBasicImage_c = new ImageIcon(changeImgB);
+		
+		Image Sign_E = SignButtonEnterImage.getImage();
+		Image changeImgE = Sign_E.getScaledInstance(330, 45, Image.SCALE_SMOOTH);
+		ImageIcon SignButtonEnterImage_E = new ImageIcon(changeImgE);
+		
+		
+		private JButton SignButton =new JButton(SignButtonBasicImage_c);	
+		//
 	
-	private JTextField TFId =new JTextField();
-	private JPasswordField TFPass =new JPasswordField();
+	
+	
+	
+	private Font fon1 = new Font("굴림", Font.PLAIN, 25);
+	
+	private JTextField TFId =new JTextField(){ 
+		public void setBorder(Border border) { // textfield에 대한 테두리 투명화
+			
+		}
+	};
+	private JPasswordField TFPass =new JPasswordField(){ 
+		public void setBorder(Border border) { // textfield에 대한 테두리 투명화
+			
+		}
+	};
 	
 	private int mouseX, mouseY;	
 	
 	public Sign() {
 		setUndecorated(true);// 실행시 메뉴바 안보이기
 		setTitle("Test");
-		setSize(600 ,615);
+		setSize(400 ,500);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,21 +87,21 @@ public class Sign extends JFrame{
 				setLocation(x-mouseX, y-mouseY);
 			}
 		});
-		add(meunBar);
+		add(meunBar); 
 		
-		SignButton.setBounds(50, 525, 500, 69);
+		SignButton.setBounds(38, 380, 330, 45);
 		SignButton.setBorderPainted(false);
 		SignButton.setContentAreaFilled(false);
 		SignButton.setFocusPainted(false);
 		SignButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				SignButton.setIcon(SignButtonEnterImage);
+				SignButton.setIcon(SignButtonEnterImage_E);
 				SignButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
-				SignButton.setIcon(SignButtonImage);
+				SignButton.setIcon(SignButtonBasicImage_c);
 				SignButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
@@ -100,11 +124,11 @@ public class Sign extends JFrame{
 		});
 		add(SignButton);
 		
-		TFId.setBounds(55, 260, 490, 70);
+		TFId.setBounds(45, 175, 310, 45);
 		TFId.setFont(fon1);
 		add(TFId);
 		
-		TFPass.setBounds(55, 425, 490, 70);
+		TFPass.setBounds(45, 285, 310, 45);
 		TFPass.setFont(fon1);
 		TFPass.setEchoChar('*');
 		add(TFPass);

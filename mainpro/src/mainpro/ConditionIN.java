@@ -25,12 +25,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class ConditionIN extends JFrame{
-	private Image screenImage;// ÀÌ¹ÌÁö¸¦ ´ã´Â°Å
+	private Image screenImage;// ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½
 	private Graphics screenGraphic;
-	
+
 	private Image Background = new ImageIcon(Main.class.getResource("../image/ConditionINBack.png")).getImage();
 	private JLabel meunBar = new JLabel(new ImageIcon(Main.class.getResource("../image/menuBar.png")));
-	
+
 	private ImageIcon BackButtonImage = new ImageIcon(Main.class.getResource("../image/ConditionBackButton.png"));
 	private ImageIcon BackButtonEnterImage = new ImageIcon(Main.class.getResource("../image/ConditionBackButtonEnter.png"));
 	private ImageIcon EndSeachButtonImage = new ImageIcon(Main.class.getResource("../image/ConditionEndSeachButton.png"));
@@ -39,39 +39,39 @@ public class ConditionIN extends JFrame{
 	private ImageIcon NecessarySubButtonEnterImage = new ImageIcon(Main.class.getResource("../image/ConditionNecessarySubButtonEnter.png"));
 	private ImageIcon SelectSubButtonImage = new ImageIcon(Main.class.getResource("../image/ConditionSelectSubButton.png"));
 	private ImageIcon SelectSubButtonEnterImage = new ImageIcon(Main.class.getResource("../image/ConditionSelectSubButtonEnter.png"));
-	
+
 	private JButton BackButton=new JButton(BackButtonImage);
 	private JButton EndSeachButton=new JButton(EndSeachButtonImage);
 	private JButton NecessarySubButton=new JButton(NecessarySubButtonImage);
 	private JButton SelectSubButton=new JButton(SelectSubButtonImage);
-	
+
 	private JTextField GradesF= new JTextField();
-	
+
 	private JTextArea SelectSubListA= new JTextArea();
 	private JTextArea  NecessarySubListA= new JTextArea();
 	private JScrollPane SelectScroll=new JScrollPane(SelectSubListA);
 	private JScrollPane NecessaryScroll=new JScrollPane(NecessarySubListA);
-	
-	private JCheckBox week1=new JCheckBox("¿ù" );
+
+	private JCheckBox week1=new JCheckBox("ï¿½ï¿½" );
 	private JCheckBox week2=new JCheckBox("È­" );
-	private JCheckBox week3=new JCheckBox("¼ö" );
-	private JCheckBox week4=new JCheckBox("¸ñ" );
-	private JCheckBox week5=new JCheckBox("±Ý" );
+	private JCheckBox week3=new JCheckBox("ï¿½ï¿½" );
+	private JCheckBox week4=new JCheckBox("ï¿½ï¿½" );
+	private JCheckBox week5=new JCheckBox("ï¿½ï¿½" );
 	private ButtonGroup week=new ButtonGroup();
-	
-	private int mouseX, mouseY;	
-	
+
+	private int mouseX, mouseY;
+
 	public ConditionIN() {
-		setUndecorated(true);// ½ÇÇà½Ã ¸Þ´º¹Ù ¾Èº¸ÀÌ±â
+		setUndecorated(true);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½Èºï¿½ï¿½Ì±ï¿½
 		setTitle("Test");
 		setSize(800, 900);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setBackground(new Color(0, 0, 0, 0)); // ÄÄÆ÷³ÍÆ®ÀÇ ¹è°æÀÌ ÇÏ¾á»ö
+		setBackground(new Color(0, 0, 0, 0)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¾ï¿½ï¿½ï¿½
 		setLayout(null);
-		
+
 		meunBar.setBounds(0, 0, 800, 30);
 		meunBar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -79,7 +79,7 @@ public class ConditionIN extends JFrame{
 				mouseX= e.getX();
 				mouseY= e.getY();
 			}
-			
+
 		});
 		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -90,7 +90,7 @@ public class ConditionIN extends JFrame{
 			}
 		});
 		add(meunBar);
-		
+
 		NecessarySubButton.setBounds(350, 180, 100, 100);
 		NecessarySubButton.setBorderPainted(false);
 		NecessarySubButton.setContentAreaFilled(false);
@@ -99,20 +99,20 @@ public class ConditionIN extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				NecessarySubButton.setIcon(NecessarySubButtonEnterImage);
-				NecessarySubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				NecessarySubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				NecessarySubButton.setIcon(NecessarySubButtonImage);
-				NecessarySubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				NecessarySubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("ÇÊ¼ö°ú¸ñ ±â´É\n");
+				System.out.print("ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 			}
 		});
 		add(NecessarySubButton);
-		
+
 		SelectSubButton.setBounds(350, 415, 100, 100);
 		SelectSubButton.setBorderPainted(false);
 		SelectSubButton.setContentAreaFilled(false);
@@ -121,20 +121,20 @@ public class ConditionIN extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				SelectSubButton.setIcon(SelectSubButtonEnterImage);
-				SelectSubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				SelectSubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				SelectSubButton.setIcon(SelectSubButtonImage);
-				SelectSubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				SelectSubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("¼±ÅÃ°ú¸ñ ±â´É\n");
+				System.out.print("ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 			}
 		});
 		add(SelectSubButton);
-		
+
 		EndSeachButton.setBounds(45, 800, 200, 50);
 		EndSeachButton.setBorderPainted(false);
 		EndSeachButton.setContentAreaFilled(false);
@@ -143,20 +143,20 @@ public class ConditionIN extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				EndSeachButton.setIcon(EndSeachButtonEnterImage);
-				EndSeachButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				EndSeachButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				EndSeachButton.setIcon(EndSeachButtonImage);
-				EndSeachButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				EndSeachButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("°Ë»ö ±â´É\n");
+				System.out.print("ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 			}
 		});
 		add(EndSeachButton);
-		
+
 		BackButton.setBounds(550, 800, 200, 50);
 		BackButton.setBorderPainted(false);
 		BackButton.setContentAreaFilled(false);
@@ -165,33 +165,33 @@ public class ConditionIN extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				BackButton.setIcon(BackButtonEnterImage);
-				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				BackButton.setIcon(BackButtonImage);
-				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("µÚ·Î ±â´É\n");
+				System.out.print("ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 			}
 		});
 		add(BackButton);
-		
-		
+
+
 		SelectSubListA.setBounds(50, 175, 285, 340);
 		SelectScroll.setBounds(50, 175, 285, 340);
 		add(SelectScroll);
-		
+
 		NecessarySubListA.setBounds(465, 175, 285, 340);
 		NecessaryScroll.setBounds(465, 175, 285, 340);
 		add(NecessaryScroll);
-		
+
 		GradesF.setBounds(45, 725, 700, 45);
 		add(GradesF);
-		
-		
+
+
 		week.add(week1);
 		week.add(week2);
 		week.add(week3);
@@ -201,16 +201,16 @@ public class ConditionIN extends JFrame{
 		week2.setBounds(220, 600, 50, 50);
 		week3.setBounds(370, 600, 50, 50);
 		week4.setBounds(520, 600, 50, 50);
-		week5.setBounds(670, 600, 50, 50);		
+		week5.setBounds(670, 600, 50, 50);
 		add(week1);
 		add(week2);
 		add(week3);
 		add(week4);
 		add(week5);
-		
-		
+
+
 	}
-	
+
 	public void paint(Graphics g) {
 		screenImage = createImage(800, 900);
 		screenGraphic = screenImage.getGraphics();
@@ -218,10 +218,10 @@ public class ConditionIN extends JFrame{
 		g.drawImage(screenImage, 0, 0, null);
 	}
 
-	// »õ·Î°íÄ§
+	// ï¿½ï¿½ï¿½Î°ï¿½Ä§
 	public void screenDraw(Graphics g) {
-		g.drawImage(Background, 0, 0, null);// ÀÌ¹ÌÁö±×¸®±â
-		paintComponents(g);// ÄÄÆ÷³ÍÆ® ÇÁ¸°Æ® J¶óº§À» ±×¸®±â
+		g.drawImage(Background, 0, 0, null);// ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½
+		paintComponents(g);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ® Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 		this.repaint();
 	}
 }
