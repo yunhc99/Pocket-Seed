@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class Outcome extends JFrame{
-	private Image screenImage;// ÀÌ¹ÌÁö¸¦ ´ã´Â°Å
+	private Image screenImage;// ì´ë¯¸ì§€ë¥¼ ë‹´ëŠ”ê±°
 	private Graphics screenGraphic;
 	
 	private Image Background = new ImageIcon(Main.class.getResource("../image/OutcomeBack.png")).getImage();
@@ -45,11 +45,11 @@ public class Outcome extends JFrame{
 	private JButton LeftButton= new JButton(LeftButtonImage);
 	
 	
-	String header[]= {"±³½Ã", "¿ù", "È­","¼ö","¸ñ","±İ"};
+	String header[]= {"êµì‹œ", "ì›”", "í™”","ìˆ˜","ëª©","ê¸ˆ"};
 	String contect[][]= {
-			{"1","Å×","½º","Æ®","¿ë","ÀÔ"},
-			{"2","Å×","½º","Æ®","¿ë","ÀÔ"},
-			{"3","Å×","½º","Æ®","¿ë","ÀÔ"}
+			{"1","í…Œ","ìŠ¤","íŠ¸","ìš©","ì…"},
+			{"2","í…Œ","ìŠ¤","íŠ¸","ìš©","ì…"},
+			{"3","í…Œ","ìŠ¤","íŠ¸","ìš©","ì…"}
 	};
 	
 	DefaultTableModel model = new DefaultTableModel(contect,header);
@@ -60,14 +60,14 @@ public class Outcome extends JFrame{
 	private int mouseX, mouseY;
 	
 	public Outcome() {
-		setUndecorated(true);// ½ÇÇà½Ã ¸Ş´º¹Ù ¾Èº¸ÀÌ±â
+		setUndecorated(true);// ì‹¤í–‰ì‹œ ë©”ë‰´ë°” ì•ˆë³´ì´ê¸°
 		setTitle("Test");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setBackground(new Color(0, 0, 0, 0)); // ÄÄÆ÷³ÍÆ®ÀÇ ¹è°æÀÌ ÇÏ¾á»ö
+		setBackground(new Color(0, 0, 0, 0)); // ì»´í¬ë„ŒíŠ¸ì˜ ë°°ê²½ì´ í•˜ì–€ìƒ‰
 		setLayout(null);
 		
 		meunBar.setBounds(0, 0, 600, 30);
@@ -97,16 +97,16 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				//RightButton.setIcon(RightButtonEnterImage);
-				RightButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				RightButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				//RightButton.setIcon(RightButtonImage);
-				RightButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				RightButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("¿À¸¥ÂÊ ±â´É\n");
+				System.out.print("ì˜¤ë¥¸ìª½ ê¸°ëŠ¥\n");
 			}
 		});
 		add(RightButton);
@@ -119,16 +119,16 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				//RightButton.setIcon(RightButtonEnterImage);
-				LeftButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				LeftButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				//RightButton.setIcon(RightButtonImage);
-				LeftButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				LeftButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("¿ŞÂÊ ±â´É\n");
+				System.out.print("ì™¼ìª½ ê¸°ëŠ¥\n");
 			}
 		});
 		add(LeftButton);
@@ -141,16 +141,16 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				BackButton.setIcon(BackButtonEnterImage);
-				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				BackButton.setIcon(BackButtonImage);
-				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("µÚ·Î°¡±â ±â´É\n");
+				System.out.print("ë’¤ë¡œê°€ê¸° ê¸°ëŠ¥\n");
 			}
 		});
 		add(BackButton);
@@ -163,16 +163,16 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				SaveButton.setIcon(SaveButtonEnterImage);
-				SaveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				SaveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				SaveButton.setIcon(SaveButtonImage);
-				SaveButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				SaveButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("ÀúÀå ±â´É\n");
+				System.out.print("ì €ì¥ ê¸°ëŠ¥\n");
 			}
 		});
 		add(SaveButton);
@@ -185,12 +185,12 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				ExitButton.setIcon(ExitButtonEnterImage);
-				ExitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				ExitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				ExitButton.setIcon(ExitButtonImage);
-				ExitButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				ExitButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
@@ -211,10 +211,10 @@ public class Outcome extends JFrame{
 		g.drawImage(screenImage, 0, 0, null);
 	}
 
-	// »õ·Î°íÄ§
+	// ìƒˆë¡œê³ ì¹¨
 	public void screenDraw(Graphics g) {
-		g.drawImage(Background, 0, 0, null);// ÀÌ¹ÌÁö±×¸®±â
-		paintComponents(g);// ÄÄÆ÷³ÍÆ® ÇÁ¸°Æ® J¶óº§À» ±×¸®±â
+		g.drawImage(Background, 0, 0, null);// ì´ë¯¸ì§€ê·¸ë¦¬ê¸°
+		paintComponents(g);// ì»´í¬ë„ŒíŠ¸ í”„ë¦°íŠ¸ Jë¼ë²¨ì„ ê·¸ë¦¬ê¸°
 		this.repaint();
 	}
 

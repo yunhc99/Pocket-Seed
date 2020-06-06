@@ -25,7 +25,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class ConditionIN extends JFrame{
-	private Image screenImage;// ÀÌ¹ÌÁö¸¦ ´ã´Â°Å
+	private Image screenImage;// ì´ë¯¸ì§€ë¥¼ ë‹´ëŠ”ê±°
 	private Graphics screenGraphic;
 	
 	private Image Background = new ImageIcon(Main.class.getResource("../image/ConditionINBack.png")).getImage();
@@ -52,24 +52,24 @@ public class ConditionIN extends JFrame{
 	private JScrollPane SelectScroll=new JScrollPane(SelectSubListA);
 	private JScrollPane NecessaryScroll=new JScrollPane(NecessarySubListA);
 	
-	private JCheckBox week1=new JCheckBox("¿ù" );
-	private JCheckBox week2=new JCheckBox("È­" );
-	private JCheckBox week3=new JCheckBox("¼ö" );
-	private JCheckBox week4=new JCheckBox("¸ñ" );
-	private JCheckBox week5=new JCheckBox("±İ" );
+	private JCheckBox week1=new JCheckBox("ì›”" );
+	private JCheckBox week2=new JCheckBox("í™”" );
+	private JCheckBox week3=new JCheckBox("ìˆ˜" );
+	private JCheckBox week4=new JCheckBox("ëª©" );
+	private JCheckBox week5=new JCheckBox("ê¸ˆ" );
 	private ButtonGroup week=new ButtonGroup();
 	
 	private int mouseX, mouseY;	
 	
 	public ConditionIN() {
-		setUndecorated(true);// ½ÇÇà½Ã ¸Ş´º¹Ù ¾Èº¸ÀÌ±â
+		setUndecorated(true);// ì‹¤í–‰ì‹œ ë©”ë‰´ë°” ì•ˆë³´ì´ê¸°
 		setTitle("Test");
 		setSize(800, 900);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setBackground(new Color(0, 0, 0, 0)); // ÄÄÆ÷³ÍÆ®ÀÇ ¹è°æÀÌ ÇÏ¾á»ö
+		setBackground(new Color(0, 0, 0, 0)); // ì»´í¬ë„ŒíŠ¸ì˜ ë°°ê²½ì´ í•˜ì–€ìƒ‰
 		setLayout(null);
 		
 		meunBar.setBounds(0, 0, 800, 30);
@@ -99,16 +99,16 @@ public class ConditionIN extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				NecessarySubButton.setIcon(NecessarySubButtonEnterImage);
-				NecessarySubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				NecessarySubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				NecessarySubButton.setIcon(NecessarySubButtonImage);
-				NecessarySubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				NecessarySubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("ÇÊ¼ö°ú¸ñ ±â´É\n");
+				System.out.print("í•„ìˆ˜ê³¼ëª© ê¸°ëŠ¥\n");
 			}
 		});
 		add(NecessarySubButton);
@@ -121,16 +121,16 @@ public class ConditionIN extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				SelectSubButton.setIcon(SelectSubButtonEnterImage);
-				SelectSubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				SelectSubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				SelectSubButton.setIcon(SelectSubButtonImage);
-				SelectSubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				SelectSubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("¼±ÅÃ°ú¸ñ ±â´É\n");
+				System.out.print("ì„ íƒê³¼ëª© ê¸°ëŠ¥\n");
 			}
 		});
 		add(SelectSubButton);
@@ -143,16 +143,16 @@ public class ConditionIN extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				EndSeachButton.setIcon(EndSeachButtonEnterImage);
-				EndSeachButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				EndSeachButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				EndSeachButton.setIcon(EndSeachButtonImage);
-				EndSeachButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				EndSeachButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("°Ë»ö ±â´É\n");
+				System.out.print("ê²€ìƒ‰ ê¸°ëŠ¥\n");
 			}
 		});
 		add(EndSeachButton);
@@ -165,16 +165,16 @@ public class ConditionIN extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				BackButton.setIcon(BackButtonEnterImage);
-				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ì†ê°€ë½ ì»¤ì„œ
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				BackButton.setIcon(BackButtonImage);
-				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ê¸°ë³¸ ì»¤ì„œ
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("µÚ·Î ±â´É\n");
+				System.out.print("ë’¤ë¡œ ê¸°ëŠ¥\n");
 			}
 		});
 		add(BackButton);
@@ -218,10 +218,10 @@ public class ConditionIN extends JFrame{
 		g.drawImage(screenImage, 0, 0, null);
 	}
 
-	// »õ·Î°íÄ§
+	// ìƒˆë¡œê³ ì¹¨
 	public void screenDraw(Graphics g) {
-		g.drawImage(Background, 0, 0, null);// ÀÌ¹ÌÁö±×¸®±â
-		paintComponents(g);// ÄÄÆ÷³ÍÆ® ÇÁ¸°Æ® J¶óº§À» ±×¸®±â
+		g.drawImage(Background, 0, 0, null);// ì´ë¯¸ì§€ê·¸ë¦¬ê¸°
+		paintComponents(g);// ì»´í¬ë„ŒíŠ¸ í”„ë¦°íŠ¸ Jë¼ë²¨ì„ ê·¸ë¦¬ê¸°
 		this.repaint();
 	}
 }
