@@ -5,6 +5,8 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -15,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 public class Login extends JFrame{
 	
@@ -30,13 +33,33 @@ public class Login extends JFrame{
 	private ImageIcon SignUpButtonImage = new ImageIcon(Main.class.getResource("../image/SignUpButton.png"));
 	
 	
-	private JButton LoginButton =new JButton(LoginButtonBasicImage);
-	private JButton SignUpButton =new JButton(SignUpButtonImage);
+	// 이미지 크기 변환
+	Image LoginB = LoginButtonBasicImage.getImage();
+	Image changeImgB = LoginB.getScaledInstance(480, 50, Image.SCALE_SMOOTH);
+	ImageIcon LoginButtonBasicImage_c = new ImageIcon(changeImgB);
 	
+	Image LoginE = LoginButtonEnterImage.getImage();
+	Image changeImgE = LoginE.getScaledInstance(480, 50, Image.SCALE_SMOOTH);
+	ImageIcon LoginButtonEnterImage_E = new ImageIcon(changeImgE);
+	
+	private JButton LoginButton =new JButton(LoginButtonBasicImage_c);
+	private JButton SignUpButton =new JButton(SignUpButtonImage);
+	//
+	
+
 	private Font fon1 = new Font("굴림", Font.PLAIN, 30);
 	
-	private JTextField TFId =new JTextField();
-	private JPasswordField TFPass =new JPasswordField();
+	
+	private JTextField TFId =new JTextField(){ 
+		public void setBorder(Border border) { // textfield에 대한 테두리 투명화
+			
+		}
+	};
+	private JPasswordField TFPass =new JPasswordField(){ 
+		public void setBorder(Border border) { // textfield에 대한 테두리 투명화
+			
+		}
+	};
 	
 
 	
@@ -74,19 +97,19 @@ public class Login extends JFrame{
 		});
 		add(meunBar);	
 		
-		LoginButton.setBounds(25, 800, 550, 60);//위치 지정
+		LoginButton.setBounds(60, 800, 480, 50);//위치 지정
 		LoginButton.setBorderPainted(false);
 		LoginButton.setContentAreaFilled(false);
 		LoginButton.setFocusPainted(false);
 		LoginButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				LoginButton.setIcon(LoginButtonEnterImage);
+				LoginButton.setIcon(LoginButtonEnterImage_E);
 				LoginButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
-				LoginButton.setIcon(LoginButtonBasicImage);
+				LoginButton.setIcon(LoginButtonBasicImage_c);
 				LoginButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
@@ -108,8 +131,9 @@ public class Login extends JFrame{
 			}
 		});
 		add(LoginButton);
+	    LoginButton.addActionListener(new action()); // 로그인 버튼 액션 이벤트 부여
 		
-		SignUpButton.setBounds(370, 530, 150, 56);
+		SignUpButton.setBounds(420, 565, 100, 40);
 		SignUpButton.setBorderPainted(false);
 		SignUpButton.setContentAreaFilled(false);
 		SignUpButton.setFocusPainted(false);
@@ -128,8 +152,8 @@ public class Login extends JFrame{
 			}
 		});
 		add(SignUpButton);
-		
-		
+		SignUpButton.addActionListener(new action()); // 회원가입 버튼 액션 이벤트 부여
+		 
 		TFId.setBounds(65,605,470,45);
 		TFId.setFont(fon1);
 		add(TFId);
@@ -152,4 +176,17 @@ public class Login extends JFrame{
 		paintComponents(g);// 컴포넌트 프린트 J라벨을 그리기
 		this.repaint();
 	}
+	
+	public class action implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+if(e.getSource()==SignUpButton) {
+	new Sign();
+	dispose();
+}
+		}
+		
+	}
+	
 }

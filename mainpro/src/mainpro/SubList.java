@@ -21,6 +21,14 @@ import javax.swing.JTextField;
 
 public class SubList extends JFrame{
 	
+	// 그림 크기 설정 값
+	int P_D_button_Weight = 90;
+	int P_D_button_High = 30;
+	int Next_button_Weight = 130;
+	int Next_button_High = 30;
+	
+	//
+	
 	private Image screenImage;// 이미지를 담는거
 	private Graphics screenGraphic;
 	
@@ -29,14 +37,41 @@ public class SubList extends JFrame{
 	
 	private ImageIcon AddButtonImage = new ImageIcon(Main.class.getResource("../image/SubListAddButton.png"));
 	private ImageIcon AddButtonEnterImage = new ImageIcon(Main.class.getResource("../image/SubListAddButtonEnter.png"));
-	private ImageIcon DeleteButtonImage = new ImageIcon(Main.class.getResource("../image/SubListDeletButton.png"));
-	private ImageIcon DeleteButtonEnterImage = new ImageIcon(Main.class.getResource("../image/SubListDeletButtonEnter.png"));
+	private ImageIcon DeleteButtonImage = new ImageIcon(Main.class.getResource("../image/SubListDeleteButton.png"));
+	private ImageIcon DeleteButtonEnterImage = new ImageIcon(Main.class.getResource("../image/SubListDeleteButtonEnter.png"));
 	private ImageIcon NextButtonImage = new ImageIcon(Main.class.getResource("../image/SubListNextButton.png"));
 	private ImageIcon NextButtonEnterImage = new ImageIcon(Main.class.getResource("../image/SubListNextButtonEnter.png"));
 	
-	private JButton AddButton= new JButton(AddButtonImage);
-	private JButton DeleteButton= new JButton(DeleteButtonImage);
-	private JButton NextButton= new JButton(NextButtonImage);
+	
+	// 이미지 크기 변환
+	Image ADD = AddButtonImage.getImage();
+	Image changeImgA = ADD.getScaledInstance(P_D_button_Weight, P_D_button_High, Image.SCALE_SMOOTH);
+	ImageIcon ADD_ButtonImage = new ImageIcon(changeImgA);
+	
+	Image ADD_E = AddButtonEnterImage.getImage();
+	Image changeImgA_E = ADD_E.getScaledInstance(P_D_button_Weight, P_D_button_High, Image.SCALE_SMOOTH);
+	ImageIcon ADD_ButtonImage_E = new ImageIcon(changeImgA_E);
+	
+	Image DELETE = DeleteButtonImage.getImage();
+	Image changeImgD = DELETE.getScaledInstance(P_D_button_Weight, P_D_button_High, Image.SCALE_SMOOTH);
+	ImageIcon DELETE_ButtonImage = new ImageIcon(changeImgD);
+	
+	Image DELETE_E = DeleteButtonEnterImage.getImage();
+	Image changeImgD_E = DELETE_E.getScaledInstance(P_D_button_Weight, P_D_button_High, Image.SCALE_SMOOTH);
+	ImageIcon DELETE_ButtonImage_E = new ImageIcon(changeImgD_E);
+	
+	Image NEXT = NextButtonImage.getImage();
+	Image changeImgN = NEXT.getScaledInstance(Next_button_Weight, Next_button_High, Image.SCALE_SMOOTH);
+	ImageIcon NEXT_ButtonImage = new ImageIcon(changeImgN);
+	
+	Image NEXT_E = NextButtonEnterImage.getImage();
+	Image changeImgN_E = NEXT_E.getScaledInstance(Next_button_Weight, Next_button_High, Image.SCALE_SMOOTH);
+	ImageIcon NEXT_ButtonImage_E = new ImageIcon(changeImgN_E);
+	
+	private JButton AddButton= new JButton(ADD_ButtonImage);
+	private JButton DeleteButton= new JButton(DELETE_ButtonImage);
+	private JButton NextButton= new JButton(NEXT_ButtonImage);
+	//
 	
 	private JTextField AddSubTF= new JTextField();
 	private JTextArea SubListA= new JTextArea();
@@ -78,19 +113,20 @@ public class SubList extends JFrame{
 		});
 		add(meunBar);
 		
-		AddButton.setBounds(430, 290, 135, 40);
+		// 추가 버튼 관리
+		AddButton.setBounds(470, 290, P_D_button_Weight, P_D_button_High);
 		AddButton.setBorderPainted(false);
 		AddButton.setContentAreaFilled(false);
 		AddButton.setFocusPainted(false);
 		AddButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				AddButton.setIcon(AddButtonEnterImage);
+				AddButton.setIcon(ADD_ButtonImage_E);
 				AddButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
-				AddButton.setIcon(AddButtonImage);
+				AddButton.setIcon(ADD_ButtonImage);
 				AddButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
@@ -99,7 +135,7 @@ public class SubList extends JFrame{
 			}
 		});
 		add(AddButton);
-		
+		//
 		
 		AddSubTF.setBounds(40, 205, 525, 70);
 		AddSubTF.setFont(fon1);
@@ -110,20 +146,20 @@ public class SubList extends JFrame{
 		scroll.setBounds(40, 420, 525, 305);
 		add(scroll);
 		
-		
-		DeleteButton.setBounds(430, 750, 135, 40);
+		// 삭제 버튼 관리
+		DeleteButton.setBounds(470, 750, P_D_button_Weight, P_D_button_High);
 		DeleteButton.setBorderPainted(false);
 		DeleteButton.setContentAreaFilled(false);
 		DeleteButton.setFocusPainted(false);
 		DeleteButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				DeleteButton.setIcon(DeleteButtonEnterImage);
+				DeleteButton.setIcon(DELETE_ButtonImage_E);
 				DeleteButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
-				DeleteButton.setIcon(DeleteButtonImage);
+				DeleteButton.setIcon(DELETE_ButtonImage);
 				DeleteButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
@@ -132,21 +168,22 @@ public class SubList extends JFrame{
 			}
 		});
 		add(DeleteButton);
+		//
 		
-		
-		NextButton.setBounds(400, 820, 190, 55);
+		// 다음 버튼 관리
+		NextButton.setBounds(430, 820, Next_button_Weight, Next_button_High);
 		NextButton.setBorderPainted(false);
 		NextButton.setContentAreaFilled(false);
 		NextButton.setFocusPainted(false);
 		NextButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				NextButton.setIcon(NextButtonEnterImage);
+				NextButton.setIcon(NEXT_ButtonImage_E);
 				NextButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
-				NextButton.setIcon(NextButtonImage);
+				NextButton.setIcon(NEXT_ButtonImage);
 				NextButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
@@ -155,7 +192,7 @@ public class SubList extends JFrame{
 			}
 		});
 		add(NextButton);
-		
+		//
 		
 		
 		

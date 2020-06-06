@@ -22,54 +22,54 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class Outcome extends JFrame{
-	private Image screenImage;// ÀÌ¹ÌÁö¸¦ ´ã´Â°Å
+	private Image screenImage;// ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½
 	private Graphics screenGraphic;
-	
+
 	private Image Background = new ImageIcon(Main.class.getResource("../image/OutcomeBack.png")).getImage();
 	private JLabel meunBar = new JLabel(new ImageIcon(Main.class.getResource("../image/menuBar.png")));
-	
+
 	private ImageIcon BackButtonImage = new ImageIcon(Main.class.getResource("../image/OutcomeBackButton.png"));
 	private ImageIcon BackButtonEnterImage = new ImageIcon(Main.class.getResource("../image/OutcomeBackButtonEnter.png"));
 	private ImageIcon SaveButtonImage = new ImageIcon(Main.class.getResource("../image/OutcomeSaveButton.png"));
 	private ImageIcon SaveButtonEnterImage = new ImageIcon(Main.class.getResource("../image/OutcomeSaveButtonEnter.png"));
 	private ImageIcon ExitButtonImage = new ImageIcon(Main.class.getResource("../image/OutcomeExitButton.png"));
 	private ImageIcon ExitButtonEnterImage = new ImageIcon(Main.class.getResource("../image/OutcomeExitButtonEnter.png"));
-	
+
 	private ImageIcon RightButtonImage = new ImageIcon(Main.class.getResource("../image/OutcomeRightButton.png"));
 	private ImageIcon LeftButtonImage = new ImageIcon(Main.class.getResource("../image/OutcomeLeftButton.png"));
-	
+
 	private JButton BackButton= new JButton(BackButtonImage);
 	private JButton SaveButton= new JButton(SaveButtonImage);
 	private JButton ExitButton= new JButton(ExitButtonImage);
 	private JButton RightButton= new JButton(RightButtonImage);
 	private JButton LeftButton= new JButton(LeftButtonImage);
-	
-	
-	String header[]= {"±³½Ã", "¿ù", "È­","¼ö","¸ñ","±Ý"};
+
+
+	String header[]= {"ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½", "È­","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½"};
 	String contect[][]= {
-			{"1","Å×","½º","Æ®","¿ë","ÀÔ"},
-			{"2","Å×","½º","Æ®","¿ë","ÀÔ"},
-			{"3","Å×","½º","Æ®","¿ë","ÀÔ"}
+			{"1","ï¿½ï¿½","ï¿½ï¿½","Æ®","ï¿½ï¿½","ï¿½ï¿½"},
+			{"2","ï¿½ï¿½","ï¿½ï¿½","Æ®","ï¿½ï¿½","ï¿½ï¿½"},
+			{"3","ï¿½ï¿½","ï¿½ï¿½","Æ®","ï¿½ï¿½","ï¿½ï¿½"}
 	};
-	
+
 	DefaultTableModel model = new DefaultTableModel(contect,header);
 	private JTable SubS=new JTable(model);
 	private JScrollPane TabelS= new JScrollPane(SubS);
-	
-	
+
+
 	private int mouseX, mouseY;
-	
+
 	public Outcome() {
-		setUndecorated(true);// ½ÇÇà½Ã ¸Þ´º¹Ù ¾Èº¸ÀÌ±â
+		setUndecorated(true);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½Èºï¿½ï¿½Ì±ï¿½
 		setTitle("Test");
 		setSize(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		setBackground(new Color(0, 0, 0, 0)); // ÄÄÆ÷³ÍÆ®ÀÇ ¹è°æÀÌ ÇÏ¾á»ö
+		setBackground(new Color(0, 0, 0, 0)); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¾ï¿½ï¿½ï¿½
 		setLayout(null);
-		
+
 		meunBar.setBounds(0, 0, 600, 30);
 		meunBar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -77,7 +77,7 @@ public class Outcome extends JFrame{
 				mouseX= e.getX();
 				mouseY= e.getY();
 			}
-			
+
 		});
 		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -88,7 +88,7 @@ public class Outcome extends JFrame{
 			}
 		});
 		add(meunBar);
-		
+
 		RightButton.setBounds(325, 558, 90, 70);
 		RightButton.setBorderPainted(false);
 		RightButton.setContentAreaFilled(false);
@@ -97,20 +97,20 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				//RightButton.setIcon(RightButtonEnterImage);
-				RightButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				RightButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				//RightButton.setIcon(RightButtonImage);
-				RightButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				RightButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("¿À¸¥ÂÊ ±â´É\n");
+				System.out.print("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 			}
 		});
 		add(RightButton);
-		
+
 		LeftButton.setBounds(182, 558, 90, 70);
 		LeftButton.setBorderPainted(false);
 		LeftButton.setContentAreaFilled(false);
@@ -119,20 +119,20 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				//RightButton.setIcon(RightButtonEnterImage);
-				LeftButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				LeftButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				//RightButton.setIcon(RightButtonImage);
-				LeftButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				LeftButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("¿ÞÂÊ ±â´É\n");
+				System.out.print("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 			}
 		});
 		add(LeftButton);
-		
+
 		BackButton.setBounds(40, 820, 160, 45);
 		BackButton.setBorderPainted(false);
 		BackButton.setContentAreaFilled(false);
@@ -141,20 +141,20 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				BackButton.setIcon(BackButtonEnterImage);
-				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				BackButton.setIcon(BackButtonImage);
-				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("µÚ·Î°¡±â ±â´É\n");
+				System.out.print("ï¿½Ú·Î°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 			}
 		});
 		add(BackButton);
-		
+
 		SaveButton.setBounds(220, 820, 160, 45);
 		SaveButton.setBorderPainted(false);
 		SaveButton.setContentAreaFilled(false);
@@ -163,20 +163,20 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				SaveButton.setIcon(SaveButtonEnterImage);
-				SaveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				SaveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				SaveButton.setIcon(SaveButtonImage);
-				SaveButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				SaveButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("ÀúÀå ±â´É\n");
+				System.out.print("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½\n");
 			}
 		});
 		add(SaveButton);
-		
+
 		ExitButton.setBounds(400, 820, 160, 45);
 		ExitButton.setBorderPainted(false);
 		ExitButton.setContentAreaFilled(false);
@@ -185,12 +185,12 @@ public class Outcome extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				ExitButton.setIcon(ExitButtonEnterImage);
-				ExitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//¼Õ°¡¶ô Ä¿¼­
+				ExitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//ï¿½Õ°ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mouseExited(MouseEvent e){
 				ExitButton.setIcon(ExitButtonImage);
-				ExitButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//±âº» Ä¿¼­
+				ExitButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//ï¿½âº» Ä¿ï¿½ï¿½
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
@@ -198,12 +198,12 @@ public class Outcome extends JFrame{
 			}
 		});
 		add(ExitButton);
-		
+
 		TabelS.setBounds(35, 205, 530, 340);
 		SubS.setBounds(35, 205, 530, 340);
 		add(TabelS);
 	}
-	
+
 	public void paint(Graphics g) {
 		screenImage = createImage(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		screenGraphic = screenImage.getGraphics();
@@ -211,10 +211,10 @@ public class Outcome extends JFrame{
 		g.drawImage(screenImage, 0, 0, null);
 	}
 
-	// »õ·Î°íÄ§
+	// ï¿½ï¿½ï¿½Î°ï¿½Ä§
 	public void screenDraw(Graphics g) {
-		g.drawImage(Background, 0, 0, null);// ÀÌ¹ÌÁö±×¸®±â
-		paintComponents(g);// ÄÄÆ÷³ÍÆ® ÇÁ¸°Æ® J¶óº§À» ±×¸®±â
+		g.drawImage(Background, 0, 0, null);// ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½×¸ï¿½ï¿½ï¿½
+		paintComponents(g);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ® Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 		this.repaint();
 	}
 
