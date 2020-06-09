@@ -273,19 +273,54 @@ public class SubList extends JFrame{
 		c2=date2_1.getSelectedItem().toString();
 		d2=date2_2.getSelectedItem().toString();
 		r2=date2_3.getSelectedItem().toString();
-		if(!(c==d)&&!(c==r)&&!(d==r)&&!(a=="")) {
-	if((b2==" ")&&(c2==" ")&&(d2==" ")&&(r2==" ")) {
-		model.addElement(a+ "  " + b + " " + c + ","+d+","+r + "  " + "학점 : " + s_num + "  인원 : " + h_num);
+
+	if(!(c==" ")&&!(d==" ")&&!(r==" ")&&(c2==" ")&&(d2==" ")&&(r2==" ")) { // 첫째 과목 셋, 둘째 영
+		model.addElement(a+ "  " + b + " " + c + "," + d + ","+ r + "  " + "학점: " + s_num + "  인원: " + h_num);
+		subject.setText("");
+		subject_number.setText("");
+		human_number.setText("");
+	}
+	else if(!(c==" ")&&!(d==" ")&&(r==" ")&&(c2==" ")&&(d2==" ")&&(r2==" ")) { // 첫째 과목 둘, 둘째 영
+		model.addElement(a+ "  " + b + " " + c + ","+ d  + "  " + "학점: " + s_num + "  인원: " + h_num);
+		subject.setText("");
+		subject_number.setText("");
+		human_number.setText("");
+	}
+	else if(!(c==" ")&&(d==" ")&&(r==" ")&&(c2==" ")&&(d2==" ")&&(r2==" ")) { // 첫째 과목 하나, 둘째 영
+		model.addElement(a+ "  " + b + " " + c + "  " + "학점: " + s_num + "  인원: " + h_num);
+		subject.setText("");
+		subject_number.setText("");
+		human_number.setText("");
+	}
+	else if(!(c==" ")&&(d==" ")&&(r==" ")&&!(c2==" ")&&(d2==" ")&&(r2==" ")) { // 첫째 과목 하나, 둘째 하나만
+		model.addElement(a+ "  " + b + " " + c +" / "+ b2 + " " + c2 + "  " + "학점: " + s_num + "  인원: " + h_num);
+		subject.setText("");
+		subject_number.setText("");
+		human_number.setText("");
+	}
+	else if(!(c==" ")&&(d==" ")&&(r==" ")&&!(c2==" ")&&!(d2==" ")&&(r2==" ")) { // 첫째 과목 하나, 둘째 두개
+		model.addElement(a+ "  " + b + " " + c +" / "+ b2 + " " + c2 + "," + d2 + "  " + "학점: " + s_num + "  인원: " + h_num);
+		subject.setText("");
+		subject_number.setText("");
+		human_number.setText("");
+	}
+	else if(!(c==" ")&&!(d==" ")&&(r==" ")&&!(c2==" ")&&(d2==" ")&&(r2==" ")) { // 첫째 과목 둘, 둘째 하나만
+		model.addElement(a+ "  " + b + " " + c + "," + d + " / "+ b2 + " " + c2 + "  " + "학점: " + s_num + "  인원: " + h_num);
+		subject.setText("");
+		subject_number.setText("");
+		human_number.setText("");
+	}
+	else if(!(c==" ")&&!(d==" ")&&(r==" ")&&!(c2==" ")&&!(d2==" ")&&(r2==" ")) { // 첫째 과목 둘, 둘째 두개
+		model.addElement(a+ "  " + b + " " + c + "," + d + " / "+ b2 + " " + c2 + "," + d2 + "  " + "학점: " + s_num + "  인원: " + h_num);
+		subject.setText("");
+		subject_number.setText("");
+		human_number.setText("");
 	}
 	else {
-		model.addElement(a+ "  " + b + " " + c + ","+d+","+r+ " / " + b2 + " " + c2 + "," + d2 + "," +
-	r2 + "  " + "학점 : " + s_num + "  인원 : " + h_num);
+		System.out.println("잘못입력함");
 	}
-		subject.setText("");
-		}
-		else {
-			System.out.printf("하이");
-		}
+
+
 	}
 	//
 	else if(e.getSource()==DeleteButton) { // 삭제 버튼 처리 이벤트
@@ -294,8 +329,8 @@ public class SubList extends JFrame{
 //
 	else if(e.getSource()==NextButton) { // 다음 버튼 처리 이벤트
 
-		//new fix(model);
-		//dispose();
+		new ConditionIN(model);
+		dispose();
 	}
 		//
 		}
