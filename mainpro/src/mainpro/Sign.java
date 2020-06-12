@@ -8,6 +8,10 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -109,6 +113,7 @@ public class Sign extends JFrame{
 				System.out.print("회원가입 기능\n");
 				//패스워드 보안상 변환과정
 				String pw = "";
+				String id = "";
 				char[] secret_pw=TFPass.getPassword();//필드에서 패스워드를 얻어옴, char[] 배열에 저장
 				for(char cha : secret_pw){ //secret_pw 배열에 저장된 암호의 자릿수 만큼 for문 돌리면서 cha에 한 글자씩 저장
 					Character.toString(cha);
@@ -116,10 +121,54 @@ public class Sign extends JFrame{
 					pw += (pw.equals("")) ? ""+cha+"" : ""+cha+"";
 				}
 				
-				System.out.print(TFId.getText()+"\n");	
+				id= TFId.getText();
+				System.out.print(id +"\n");	
 				System.out.print(pw + "\n");
 				TFId.setText("");
 				TFPass.setText("");
+				
+				//DB 연동 부분
+				Connection conn = null;
+		        Statement stmt = null;
+		        try{
+		            Class.forName("com.mysql.jdbc.Driver");
+		 
+		            conn = DriverManager.getConnection(Main.url, Main.id, Main.pw);
+		 
+		            System.out.println("Successfully Connected!");
+		 
+		            //DB와 연결된 conn 객체로부터 Statement 객체 획득.
+		            stmt = conn.createStatement();
+		 
+		            //query 만들기		            
+		            String sql="INSERT INTO `seed`.`user` (`id`, `pass`) VALUES "+"('"+id+"','"+pw+"')";
+		            
+		            
+		            //query문 날리기
+		            stmt.execute(sql);
+		            System.out.println("Sign Success end");
+		            //회원 가입 완료  시퀸스 입력
+		            
+		        }catch(ClassNotFoundException e1){
+		            e1.printStackTrace();
+		        }
+		        catch(SQLException e1){
+		            e1.printStackTrace();
+		        }
+		        finally{
+		            try{
+		                //자원 해제
+		                if(conn != null && !conn.isClosed())
+		                    conn.close();
+		            } catch(SQLException e1){
+		                e1.printStackTrace();
+		            }
+		        }
+		        System.out.println("ALL end");
+		        //결과창 올리기
+				//회원가입완료시 로그인창으로 돌아가기
+		        new Login();
+				dispose();
 			}
 		});
 		add(SignButton);
