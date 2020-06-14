@@ -25,53 +25,53 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 public class Login extends JFrame{
-	
+
 	private Image screenImage;// 이미지를 담는거
 	private Graphics screenGraphic;
-	
+
 	private Image Background = new ImageIcon(Main.class.getResource("../image/LoginBack.png")).getImage();
 	private JLabel meunBar = new JLabel(new ImageIcon(Main.class.getResource("../image/menuBar.png")));
-	
-	
+
+
 	private ImageIcon LoginButtonBasicImage = new ImageIcon(Main.class.getResource("../image/LoginButtonBasic.png"));
 	private ImageIcon LoginButtonEnterImage = new ImageIcon(Main.class.getResource("../image/LoginButtonEnter.png"));
 	private ImageIcon SignUpButtonImage = new ImageIcon(Main.class.getResource("../image/SignUpButton.png"));
-	
-	
+
+
 	// 이미지 크기 변환
 	Image LoginB = LoginButtonBasicImage.getImage();
 	Image changeImgB = LoginB.getScaledInstance(480, 50, Image.SCALE_SMOOTH);
 	ImageIcon LoginButtonBasicImage_c = new ImageIcon(changeImgB);
-	
+
 	Image LoginE = LoginButtonEnterImage.getImage();
 	Image changeImgE = LoginE.getScaledInstance(480, 50, Image.SCALE_SMOOTH);
 	ImageIcon LoginButtonEnterImage_E = new ImageIcon(changeImgE);
-	
+
 	private JButton LoginButton =new JButton(LoginButtonBasicImage_c);
 	private JButton SignUpButton =new JButton(SignUpButtonImage);
 	//
-	
+
 
 	private Font fon1 = new Font("굴림", Font.PLAIN, 30);
-	
-	
-	private JTextField TFId =new JTextField(){ 
-		public void setBorder(Border border) { // textfield에 대한 테두리 투명화
-			
-		}
-	};
-	private JPasswordField TFPass =new JPasswordField(){ 
-		public void setBorder(Border border) { // textfield에 대한 테두리 투명화
-			
-		}
-	};
-	
 
-	
-	private int mouseX, mouseY;	
-	
-	
-	
+
+	private JTextField TFId =new JTextField(){
+		public void setBorder(Border border) { // textfield에 대한 테두리 투명화
+
+		}
+	};
+	private JPasswordField TFPass =new JPasswordField(){
+		public void setBorder(Border border) { // textfield에 대한 테두리 투명화
+
+		}
+	};
+
+
+
+	private int mouseX, mouseY;
+
+
+
 	public Login() {
 		setUndecorated(true);// 실행시 메뉴바 안보이기
 		setTitle("Test");
@@ -82,7 +82,7 @@ public class Login extends JFrame{
 		setVisible(true);
 		setBackground(new Color(0, 0, 0, 0)); // 컴포넌트의 배경이 하얀색
 		setLayout(null);
-		
+
 		meunBar.setBounds(0, 0, 600, 30);
 		meunBar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -90,7 +90,7 @@ public class Login extends JFrame{
 				mouseX= e.getX();
 				mouseY= e.getY();
 			}
-			
+
 		});
 		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -100,8 +100,8 @@ public class Login extends JFrame{
 				setLocation(x-mouseX, y-mouseY);
 			}
 		});
-		add(meunBar);	
-		
+		add(meunBar);
+
 		LoginButton.setBounds(60, 800, 480, 50);//위치 지정
 		LoginButton.setBorderPainted(false);
 		LoginButton.setContentAreaFilled(false);
@@ -120,28 +120,28 @@ public class Login extends JFrame{
 					pw += (pw.equals("")) ? ""+cha+"" : ""+cha+"";
 				}
 				id=TFId.getText();
-				System.out.print(id +"\n");	
+				System.out.print(id +"\n");
 				System.out.print(pw + "\n");
 				TFId.setText("");
 				TFPass.setText("");
-				
+
 				//DB연동 시작
 				Connection conn = null;
 		        Statement stmt = null;
 		        try{
 		            Class.forName("com.mysql.jdbc.Driver");
-		 
+
 		            conn = DriverManager.getConnection(Main.url, Main.id, Main.pw);
-		 
+
 		            System.out.println("Successfully Connected!");
-		 
+
 		            //DB와 연결된 conn 객체로부터 Statement 객체 획득.
 		            stmt = conn.createStatement();
-		 
+
 		            //query 만들기
-		            //String rootid="root";		            
+		            //String rootid="root";
 		            ResultSet result = stmt.executeQuery("SELECT * FROM user WHERE id='"+id+"'" );
-		            
+
 		            while (result.next()) {
 						String data1=result.getString("id");
 				       	String data2=result.getString("pass");
@@ -152,7 +152,7 @@ public class Login extends JFrame{
 				       			//과목목록창으로 이동
 				       			new SubList();
 								dispose();
-				       			
+
 				       		}else {
 				       			System.out.println("pass fail");
 				       			//패스워드 틀림 경고문
@@ -161,12 +161,12 @@ public class Login extends JFrame{
 				       		System.out.println("id fail");
 				       		//아이디 틀림 경고문
 				       	}
-		            }		            		        		           
-		            //query문 날리기		            
+		            }
+		            //query문 날리기
 		            System.out.println("ALL Success end");
-		            
-		            
-		            
+
+
+
 		        }catch(ClassNotFoundException e1){
 		            e1.printStackTrace();
 		        }
@@ -182,14 +182,14 @@ public class Login extends JFrame{
 		                e1.printStackTrace();
 		            }
 		        }
-				
-				
-				
+
+
+
 			}//로그인 이벤트 끝
 		});
 		add(LoginButton);
 	    LoginButton.addActionListener(new action()); // 로그인 버튼 액션 이벤트 부여
-		
+
 		SignUpButton.setBounds(420, 565, 100, 40);
 		SignUpButton.setBorderPainted(false);
 		SignUpButton.setContentAreaFilled(false);
@@ -212,15 +212,15 @@ public class Login extends JFrame{
 		});
 		add(SignUpButton);
 		SignUpButton.addActionListener(new action()); // 회원가입 버튼 액션 이벤트 부여
-		 
+
 		TFId.setBounds(65,605,470,45);
 		TFId.setFont(fon1);
 		add(TFId);
-		
+
 		TFPass.setBounds(65,715,470,45);
 		TFPass.setFont(fon1);
 		add(TFPass);
-		
+
 	}
 	public void paint(Graphics g) {
 		screenImage = createImage(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
@@ -235,7 +235,7 @@ public class Login extends JFrame{
 		paintComponents(g);// 컴포넌트 프린트 J라벨을 그리기
 		this.repaint();
 	}
-	
+
 	public class action implements ActionListener{
 
 		@Override
@@ -245,7 +245,7 @@ if(e.getSource()==SignUpButton) {
 	dispose();
 }
 		}
-		
+
 	}
-	
+
 }
