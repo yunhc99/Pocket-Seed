@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -156,15 +157,19 @@ public class Login extends JFrame{
 				       		}else {
 				       			System.out.println("pass fail");
 				       			//패스워드 틀림 경고문
+				       			JOptionPane.showMessageDialog(null, "패스워드가 틀렸습니다. 다시 입력해주세요");
 				       		}
 				       	}else {
 				       		System.out.println("id fail");
 				       		//아이디 틀림 경고문
+				       		JOptionPane.showMessageDialog(null, "아이디가 틀렸습니다. 다시 입력해주세요");
 				       	}
 		            }
 		            //query문 날리기
 		            System.out.println("ALL Success end");
-
+		            System.out.println("id fail");
+		            //아이디 틀림 경고문
+		            JOptionPane.showMessageDialog(null, "아이디가 틀렸습니다. 다시 입력해주세요");
 
 
 		        }catch(ClassNotFoundException e1){

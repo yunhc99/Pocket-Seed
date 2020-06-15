@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -120,7 +121,7 @@ public class Sign extends JFrame{
 					//pw 에 저장하기, pw 에 값이 비어있으면 저장, 값이 있으면 이어서 저장하는 삼항연산자
 					pw += (pw.equals("")) ? ""+cha+"" : ""+cha+"";
 				}
-<<<<<<< HEAD
+
 
 				id= TFId.getText();
 				System.out.print(id +"\n");
@@ -128,15 +129,6 @@ public class Sign extends JFrame{
 				TFId.setText("");
 				TFPass.setText("");
 
-=======
-
-				id= TFId.getText();
-				System.out.print(id +"\n");
-				System.out.print(pw + "\n");
-				TFId.setText("");
-				TFPass.setText("");
-
->>>>>>> list
 				//DB 연동 부분
 				Connection conn = null;
 		        Statement stmt = null;
@@ -176,8 +168,9 @@ public class Sign extends JFrame{
 		        }
 		        System.out.println("ALL end");
 		        //결과창 올리기
-				//회원가입완료시 로그인창으로 돌아가기
+				//회원가입완료시 로그인창으로 돌아가기		        		       
 		        new Login();
+		        JOptionPane.showMessageDialog(null, "회원가입을 완료했습니다.");	
 				dispose();
 			}
 		});
