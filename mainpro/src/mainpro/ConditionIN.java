@@ -30,6 +30,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 
 
@@ -43,8 +44,8 @@ public class ConditionIN extends JFrame{
 	//
 
 	//과목 정보들
-	ArrayList<Sub_dater> information_nec = new ArrayList<>();
-	ArrayList<Sub_dater> information_sel = new ArrayList<>();
+	ArrayList<Sub_dater> information_nec ;
+	ArrayList<Sub_dater> information_sel ;
 	Sub_dater sub_dater;
     Day_dater day_dater = new Day_dater();
 	//
@@ -107,7 +108,8 @@ public class ConditionIN extends JFrame{
     DefaultListModel nec_model;
 
     //체크박스
-    JCheckBox monday = new JCheckBox("월요일", false);
+    JCheckBox monday = new JCheckBox("월요일", false) ;
+
     JCheckBox tuesday = new JCheckBox("화요일", false);
     JCheckBox wednesday = new JCheckBox("수요일", false);
     JCheckBox thursday = new JCheckBox("목요일", false);
@@ -116,8 +118,13 @@ public class ConditionIN extends JFrame{
 
 
     //학점
-	private JTextField GradesF= new JTextField();
+	private JTextField GradesF= new JTextField() {
+public void setBorder(Border border) { // 테두리 투명화
+}
+	};
 	//
+
+	private Font fon1 = new Font("굴림", Font.PLAIN, 20);
 
 	private int mouseX, mouseY;
 
@@ -154,8 +161,15 @@ public class ConditionIN extends JFrame{
 		// 필수 선택 창
 		nec_list = new JList(model);
 		sel_list = new JList(new DefaultListModel());
-		JScrollPane nec_scroll = new JScrollPane(nec_list);
-		JScrollPane sel_scroll = new JScrollPane(sel_list);
+		JScrollPane nec_scroll = new JScrollPane(nec_list) {
+			public void setBorder(Border border) { // 테두리 투명화
+		}
+			};
+		JScrollPane sel_scroll = new JScrollPane(sel_list) {
+				public void setBorder(Border border) { // 테두리 투명화
+
+		}
+		};
 
 		add(nec_scroll);
 		add(sel_scroll);
@@ -166,6 +180,12 @@ public class ConditionIN extends JFrame{
 		nec_scroll.setBounds(45, 175, 200, 340);
 sel_scroll.setBounds(355, 175, 200, 340);
 		//
+
+monday.setBackground(Color.WHITE);
+tuesday.setBackground(Color.WHITE);
+wednesday.setBackground(Color.WHITE);
+thursday.setBackground(Color.WHITE);
+friday.setBackground(Color.WHITE);
 
 		// 필수 화살표 버튼
 		NecessarySubButton.setBounds(265, 250, N_S_button_Weight, N_S_button_High);
@@ -268,7 +288,8 @@ sel_scroll.setBounds(355, 175, 200, 340);
 		//
 
 		//학점 텍스트
-		GradesF.setBounds(45, 725, 500, 45);
+		GradesF.setBounds(60, 725, 500, 45);
+	    GradesF.setFont(fon1);
 		add(GradesF);
 		//
 
@@ -287,11 +308,11 @@ sel_scroll.setBounds(355, 175, 200, 340);
 		friday.addItemListener(new Listen());
 		//
 
-		monday.setBounds(75, 600, 50, 48);
-		tuesday.setBounds(175, 600, 50, 48);
-		wednesday.setBounds(275, 600, 50, 48);
-		thursday.setBounds(375, 600, 50, 48);
-		friday.setBounds(475, 600, 50, 48);
+		monday.setBounds(68, 597, 65, 48);
+		tuesday.setBounds(168, 597, 65, 48);
+		wednesday.setBounds(268, 597, 65, 48);
+		thursday.setBounds(368, 597, 65, 48);
+		friday.setBounds(468, 597, 65, 48);
 //
 
 
@@ -311,8 +332,10 @@ sel_scroll.setBounds(355, 175, 200, 340);
 			}
 
 			else if(e.getSource()==EndSeachButton) { // 검색 버튼 클릭
+				information_nec = new ArrayList<>();
+				information_sel = new ArrayList<>();
 				day_dater.subject_check_num = Integer.valueOf(GradesF.getText()); //학점
-
+				//System.out.println(day_dater.subject_check_num);
 				for(int i=0;i<nec_model.getSize();i++) {
 					information_nec.add(new Sub_dater((String) nec_model.getElementAt(i))); //필수
 				}
@@ -321,7 +344,7 @@ sel_scroll.setBounds(355, 175, 200, 340);
 					information_sel.add(new Sub_dater((String) sel_model.getElementAt(i))); //선택
 				}
 
-				System.out.println("월요일 : " + day_dater.monday);
+/*				System.out.println("월요일 : " + day_dater.monday);
 				System.out.println("화요일 : " + day_dater.tuesday);
 				System.out.println("수요일 : " + day_dater.wednesday);
 				System.out.println("목요일 : " + day_dater.thursday);
@@ -343,6 +366,9 @@ sel_scroll.setBounds(355, 175, 200, 340);
 							+ sub_dater.Date_first_2 + sub_dater.Date_first_3 + sub_dater.Day_Second + sub_dater.Date_Second_1
 							+ sub_dater.Date_Second_2 + sub_dater.Date_Second_3 + sub_dater.Sub_num + sub_dater.Sub_human);
 					}
+	*/
+				new Result_process(information_nec, day_dater);
+
 			}
 		}
 	}
