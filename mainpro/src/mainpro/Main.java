@@ -7,7 +7,7 @@ public class Main {
 
 
 		//데이터 베이스 관련 입력 함수입니다 맞게 변경 해주세요
-		public static final String url = "jdbc:mysql://localhost/seed?useSSL=false";
+		public static final String url = "jdbc:mysql://localhost:3306/(db명)?characterEncoding=UTF-8&serverTimezone=UTC";
 		public static final String id = "root";
 		public static final String pw = "0000";
 	public static void main(String[] args)
