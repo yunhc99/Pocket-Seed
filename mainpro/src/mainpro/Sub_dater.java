@@ -27,6 +27,10 @@ int hum_check; // 인원 체크
 int day1; //첫번째 요일 체크
 int day2; //두번째 요일 체크
 
+public Sub_dater() {
+
+}
+
 public Sub_dater(String origin_sub_dater){
 	this.origin_sub_dater = origin_sub_dater;
 	StringTokenizer sub_dater = new StringTokenizer(origin_sub_dater);
