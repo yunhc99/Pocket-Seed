@@ -131,48 +131,36 @@ public class Login extends JFrame{
 		        Statement stmt = null;
 		        try{
 		            Class.forName("com.mysql.jdbc.Driver");
-
+		 
 		            conn = DriverManager.getConnection(Main.url, Main.id, Main.pw);
-
+		 
 		            System.out.println("Successfully Connected!");
-
+		 
 		            //DB와 연결된 conn 객체로부터 Statement 객체 획득.
 		            stmt = conn.createStatement();
-
-		            //query 만들기
-		            //String rootid="root";
-		            ResultSet result = stmt.executeQuery("SELECT * FROM user WHERE id='"+id+"'" );
-
-		            while (result.next()) {
-						String data1=result.getString("id");
-				       	String data2=result.getString("pass");
-				       	if(data1.equals(id)) {
-				       		if(data2.equals(pw)) {
-				       			System.out.println("login Success");
-				       			//로그인 성공시 시퀸스
-				       			//과목목록창으로 이동
-				       			new SubList();
-								dispose();
-
-				       		}else {
-				       			System.out.println("pass fail");
-				       			//패스워드 틀림 경고문
-				       			JOptionPane.showMessageDialog(null, "패스워드가 틀렸습니다. 다시 입력해주세요");
-				       		}
-				       	}else {
-				       		System.out.println("id fail");
-				       		//아이디 틀림 경고문
-				       		JOptionPane.showMessageDialog(null, "아이디가 틀렸습니다. 다시 입력해주세요");
-				       	}
-		            }
-		            //query문 날리기
-		            System.out.println("ALL Success end");
-		            System.out.println("id fail");
-		            //아이디 틀림 경고문
-		            JOptionPane.showMessageDialog(null, "아이디가 틀렸습니다. 다시 입력해주세요");
-
-
-		        }catch(ClassNotFoundException e1){
+		 
+		            //query 만들기		            		          
+		            String Seach= "SELECT * FROM user WHERE id LIKE '"+id+"'";		            
+		            ResultSet result = stmt.executeQuery(Seach);
+		           if(result.next()) {
+		        	   if(pw.equals(result.getString("pass"))) {
+		        		   System.out.println("Login Success");
+		        		   JOptionPane.showMessageDialog(null, "로그인 성공!");
+		        		   new SubList();
+		        		   dispose();
+		        	   }else {        		   
+		        		   System.out.println("pass fail");
+		        		   JOptionPane.showMessageDialog(null, "패스워드가 틀렸습니다. 다시 입력해주세요");
+		        	   }        	   
+		           }else {        	   
+		        	   System.out.println("id fail");
+		        	   JOptionPane.showMessageDialog(null, "아이디가 틀렸습니다. 다시 입력해주세요");
+		           }                               
+		            //query문 날리기            
+		            System.out.println("Success end");
+		        }
+		 
+		        catch(ClassNotFoundException e1){
 		            e1.printStackTrace();
 		        }
 		        catch(SQLException e1){
