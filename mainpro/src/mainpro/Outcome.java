@@ -1,26 +1,28 @@
 package mainpro;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Font;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
 public class Outcome extends JFrame{
 	private Image screenImage;// 이미지를 담는거
@@ -125,7 +127,16 @@ public class Outcome extends JFrame{
 				mouseY= e.getY();
 			}
 
+		});				
+		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				int x=e.getXOnScreen();
+				int y=e.getYOnScreen();
+				setLocation(x-mouseX, y-mouseY);
+			}
 		});
+		add(meunBar);
 
 
 
@@ -165,16 +176,11 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 		JTable table = new JTable(contect, header);
 
 		JScrollPane scroll = new JScrollPane(table);
-
-		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				int x=e.getXOnScreen();
-				int y=e.getYOnScreen();
-				setLocation(x-mouseX, y-mouseY);
-			}
-		});
-		add(meunBar);
+		
+		
+		
+		
+		
 
 		RightButton.setBounds(332, 558, 80, 70);
 		RightButton.setBorderPainted(false);
@@ -259,7 +265,28 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("저장 기능\n");
+				String saveFilePath = "../";
+		        String saveFileName = "test";
+		        String saveFileExtension = "png";
+		        		        		       
+		        Dimension frameSize = getSize();
+		        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();		        
+		        
+		        try {
+		            Robot robot = new Robot();
+		            //Rectangle rectangle = new Rectangle(500, 500, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);		            
+		            Rectangle rectangle = new Rectangle((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2,
+		            		Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
+		            BufferedImage image = robot.createScreenCapture(rectangle);
+		            image.setRGB(0,0,100);
+		            
+		            File file = new File(saveFilePath+saveFileName+"."+saveFileExtension);
+		            ImageIO.write(image, saveFileExtension, file);
+		        } catch (Exception e1){
+		            e1.printStackTrace();
+		        }
+		        JOptionPane.showMessageDialog(null, "이미지 저장 완료");
+				System.out.print("저장 기능 완료\n");
 			}
 		});
 		add(SaveButton);
