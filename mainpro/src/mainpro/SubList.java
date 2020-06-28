@@ -51,6 +51,8 @@ public class SubList extends JFrame{
 
 
 	// 이미지 크기 변환
+
+
 	Image ADD = AddButtonImage.getImage();
 	Image changeImgA = ADD.getScaledInstance(P_D_button_Weight, P_D_button_High, Image.SCALE_SMOOTH);
 	ImageIcon ADD_ButtonImage = new ImageIcon(changeImgA);
@@ -82,7 +84,7 @@ public class SubList extends JFrame{
 
 	// 요일
 	String[] day = {" ", "월", "화", "수", "목", "금"};
-	String[] date = {" ", "1", "2", "3", "4", "5", "6"};
+	String[] date = {" ", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 	JComboBox day1 = new JComboBox(day); //요일1
 	JComboBox date1 = new JComboBox(date); //1의 시간
 	JComboBox date2 = new JComboBox(date); //1의 시간
@@ -101,6 +103,13 @@ public class SubList extends JFrame{
 
 	private int mouseX, mouseY;
 
+	DefaultListModel model_l;
+    JList list_l = new JList(new DefaultListModel());
+    JScrollPane scroll_l = new JScrollPane(list_l) {
+	public void setBorder(Border border) { // 테두리 투명화
+
+	}
+    };
 	// 목록 보여주는 창
 	DefaultListModel model;
     JList list = new JList(new DefaultListModel());
@@ -170,8 +179,15 @@ public class SubList extends JFrame{
 		add(scroll);
 		model = (DefaultListModel)list.getModel();
 		list.setFont(fon1);
-		scroll.setBounds(60,420,505,305);
+		scroll.setBounds(60,540,505,188);
 		//
+
+
+		add(scroll_l);
+		model_l = (DefaultListModel)list_l.getModel();
+		list_l.setFont(fon1);
+		scroll_l.setBounds(60,178,505,84);
+
 
 		// 과목 입력
 
@@ -187,17 +203,17 @@ public class SubList extends JFrame{
 		add(subject_number);
 		add(human_number);
 
-		subject.setBounds(60,210,140,25);
-		subject_number.setBounds(60,245,50,25);
-		human_number.setBounds(140,245,50,25);
-		day1.setBounds(230,210,45,25);
-		date1.setBounds(280,210,45,25);
-		date2.setBounds(330,210,45,25);
-		date3.setBounds(380,210,45,25);
-		day2.setBounds(230,245,45,25);
-		date2_1.setBounds(280,245,45,25);
-		date2_2.setBounds(330,245,45,25);
-		date2_3.setBounds(380,245,45,25);
+		subject.setBounds(60,360,140,25);
+		subject_number.setBounds(60,395,50,25);
+		human_number.setBounds(140,395,50,25);
+		day1.setBounds(230,360,45,25);
+		date1.setBounds(280,360,45,25);
+		date2.setBounds(330,360,45,25);
+		date3.setBounds(380,360,45,25);
+		day2.setBounds(230,395,45,25);
+		date2_1.setBounds(280,395,45,25);
+		date2_2.setBounds(330,395,45,25);
+		date2_3.setBounds(380,395,45,25);
 		//
 
 		// 삭제 버튼 관리
@@ -224,7 +240,7 @@ public class SubList extends JFrame{
 		add(DeleteButton);
 		DeleteButton.addActionListener(new action());
 		//
-
+		
 		// 다음 버튼 관리
 		NextButton.setBounds(430, 820, Next_button_Weight, Next_button_High);
 		NextButton.setBorderPainted(false);
