@@ -112,6 +112,7 @@ public class Sign extends JFrame{
 			@Override
 			public void mousePressed(MouseEvent e){
 				System.out.print("회원가입 기능\n");
+				int x=0;//1이라면 회원가입 실패
 				//패스워드 보안상 변환과정
 				String pw = "";
 				String id = "";
@@ -156,6 +157,8 @@ public class Sign extends JFrame{
 		        }
 		        catch(SQLException e1){
 		            e1.printStackTrace();
+		            x++;
+		            JOptionPane.showMessageDialog(null, "중복되는 아이디입니다.");
 		        }
 		        finally{
 		            try{
@@ -168,10 +171,12 @@ public class Sign extends JFrame{
 		        }
 		        System.out.println("ALL end");
 		        //결과창 올리기
-				//회원가입완료시 로그인창으로 돌아가기		        		       
-		        new Login();
-		        JOptionPane.showMessageDialog(null, "회원가입을 완료했습니다.");	
-				dispose();
+				//회원가입완료시 로그인창으로 돌아가기		
+		        if(x==0) {
+		        	new Login();
+		        	JOptionPane.showMessageDialog(null, "회원가입을 완료했습니다.");	
+		        	dispose();
+		        }
 			}
 		});
 		add(SignButton);
