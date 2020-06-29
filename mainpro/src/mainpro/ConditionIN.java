@@ -159,8 +159,8 @@ public void setBorder(Border border) { // 테두리 투명화
 		add(meunBar);
 
 		// 필수 선택 창
-		nec_list = new JList(model);
-		sel_list = new JList(new DefaultListModel());
+		sel_list = new JList(model);
+		nec_list = new JList(new DefaultListModel());
 		JScrollPane nec_scroll = new JScrollPane(nec_list) {
 			public void setBorder(Border border) { // 테두리 투명화
 		}
@@ -177,8 +177,8 @@ public void setBorder(Border border) { // 테두리 투명화
 		nec_model = (DefaultListModel)nec_list.getModel();
 		sel_model = (DefaultListModel)sel_list.getModel();
 
-		nec_scroll.setBounds(45, 175, 200, 340);
-sel_scroll.setBounds(355, 175, 200, 340);
+		nec_scroll.setBounds(355, 175, 200, 340);
+sel_scroll.setBounds(45, 175, 200, 340);
 		//
 
 monday.setBackground(Color.WHITE);
@@ -323,12 +323,12 @@ friday.setBackground(Color.WHITE);
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==SelectSubButton) { // 선택 화살표 클릭
-				nec_model.addElement(sel_list.getSelectedValue());
-				sel_model.removeElement(sel_list.getSelectedValue());
-			}
-			else if(e.getSource()==NecessarySubButton) { // 필수 화살표 클릭
 				sel_model.addElement(nec_list.getSelectedValue());
 				nec_model.removeElement(nec_list.getSelectedValue());
+			}
+			else if(e.getSource()==NecessarySubButton) { // 필수 화살표 클릭
+				nec_model.addElement(sel_list.getSelectedValue());
+				sel_model.removeElement(sel_list.getSelectedValue());
 			}
 
 			else if(e.getSource()==EndSeachButton) { // 검색 버튼 클릭
@@ -340,8 +340,8 @@ friday.setBackground(Color.WHITE);
 					information_nec.add(new Sub_dater((String) nec_model.getElementAt(i))); //필수
 				}
 
-				for(int i=0;i<sel_model.getSize();i++) {
-					information_sel.add(new Sub_dater((String) sel_model.getElementAt(i))); //선택
+				for(int h=0;h<sel_model.getSize();h++) {
+					information_sel.add(new Sub_dater((String) sel_model.getElementAt(h))); //선택
 				}
 
 /*				System.out.println("월요일 : " + day_dater.monday);
@@ -367,7 +367,12 @@ friday.setBackground(Color.WHITE);
 							+ sub_dater.Date_Second_2 + sub_dater.Date_Second_3 + sub_dater.Sub_num + sub_dater.Sub_human);
 					}
 	*/
-				new Result_process(information_nec, day_dater);
+				Result_process nec_result = new Result_process(information_nec, day_dater);
+			    Result_process_select sel_result = new Result_process_select(information_sel, day_dater, nec_result.select_grade);
+			    Result result = new Result(nec_result.list_base, sel_result.list_base);
+
+				   new Outcome(result.list_base);
+				  dispose();
 
 			}
 		}

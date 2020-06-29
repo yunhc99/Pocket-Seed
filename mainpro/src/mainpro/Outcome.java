@@ -1,28 +1,29 @@
 package mainpro;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
+import java.awt.FileDialog;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class Outcome extends JFrame{
 	private Image screenImage;// 이미지를 담는거
@@ -43,6 +44,7 @@ public class Outcome extends JFrame{
 
 	ArrayList<ArrayList<Sub_dater>> list_base_base;
 
+	int count_subject = 0;
 	// 이미지 크기 변환
 			Image Back_B = BackButtonImage.getImage();
 			Image BB = Back_B.getScaledInstance(130, 30, Image.SCALE_SMOOTH);
@@ -127,16 +129,7 @@ public class Outcome extends JFrame{
 				mouseY= e.getY();
 			}
 
-		});				
-		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				int x=e.getXOnScreen();
-				int y=e.getYOnScreen();
-				setLocation(x-mouseX, y-mouseY);
-			}
 		});
-		add(meunBar);
 
 
 
@@ -173,14 +166,22 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 	count2(5, u);
 }
 		}
+
+
+
 		JTable table = new JTable(contect, header);
 
 		JScrollPane scroll = new JScrollPane(table);
-		
-		
-		
-		
-		
+
+		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				int x=e.getXOnScreen();
+				int y=e.getYOnScreen();
+				setLocation(x-mouseX, y-mouseY);
+			}
+		});
+		add(meunBar);
 
 		RightButton.setBounds(332, 558, 80, 70);
 		RightButton.setBorderPainted(false);
@@ -203,6 +204,7 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 			}
 		});
 		add(RightButton);
+		RightButton.addActionListener(new action());
 
 		LeftButton.setBounds(182, 558, 80, 70);
 		LeftButton.setBorderPainted(false);
@@ -225,6 +227,7 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 			}
 		});
 		add(LeftButton);
+		LeftButton.addActionListener(new action());
 
 		BackButton.setBounds(40, 820, 130, 30);
 		BackButton.setBorderPainted(false);
@@ -265,31 +268,11 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				String saveFilePath = "../";
-		        String saveFileName = "test";
-		        String saveFileExtension = "png";
-		        		        		       
-		        Dimension frameSize = getSize();
-		        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();		        
-		        
-		        try {
-		            Robot robot = new Robot();
-		            //Rectangle rectangle = new Rectangle(500, 500, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);		            
-		            Rectangle rectangle = new Rectangle((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2,
-		            		Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
-		            BufferedImage image = robot.createScreenCapture(rectangle);
-		            image.setRGB(0,0,100);
-		            
-		            File file = new File(saveFilePath+saveFileName+"."+saveFileExtension);
-		            ImageIO.write(image, saveFileExtension, file);
-		        } catch (Exception e1){
-		            e1.printStackTrace();
-		        }
-		        JOptionPane.showMessageDialog(null, "이미지 저장 완료");
-				System.out.print("저장 기능 완료\n");
+				System.out.print("저장 기능\n");
 			}
 		});
 		add(SaveButton);
+		SaveButton.addActionListener(new action());
 
 		ExitButton.setBounds(430, 820, 130, 30);
 		ExitButton.setBorderPainted(false);
@@ -314,7 +297,7 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 		add(ExitButton);
 
 		table.getColumnModel().getColumn(0).setPreferredWidth(60);
-		table.setRowHeight(39);
+		table.setRowHeight(35);
 
 
 		scroll.setBounds(38, 205, 525, 335);
@@ -501,6 +484,114 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 		if(list_base_base.get(0).get(u).Date_Second_3.equals("9")) {
 			contect[8][i]= list_base_base.get(0).get(u).subject_name;
 		}
+	}
+
+	public class action implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+
+			if(e.getSource()==SaveButton) {
+
+			}
+
+
+			if(e.getSource()==LeftButton) {
+				count_subject--;
+				if(count_subject<0) {
+					count_subject=list_base_base.size()-1;
+				}
+
+				for(int y=0; y<9; y++) {
+					for(int i=1; i<6 ; i++) {
+				contect[y][i]="";
+					}
+				}
+
+					for(int u=0 ; u<list_base_base.get(0).size(); u++) {
+						if(list_base_base.get(count_subject).get(u).Day_first.equals("월")){
+				count(1, u);
+						}
+				if(list_base_base.get(count_subject).get(u).Day_first.equals("화")){
+					count(2, u);
+						}
+				if(list_base_base.get(count_subject).get(u).Day_first.equals("수")){
+					count(3, u);
+				}
+				if(list_base_base.get(count_subject).get(u).Day_first.equals("목")){
+					count(4, u);
+				}
+				if(list_base_base.get(count_subject).get(u).Day_first.equals("금")){
+					count(5, u);
+				}
+				if(list_base_base.get(count_subject).get(u).Day_Second.equals("월")){
+					count2(1, u);
+				}
+				if(list_base_base.get(count_subject).get(u).Day_Second.equals("화")){
+					count2(2, u);
+				}
+				if(list_base_base.get(count_subject).get(u).Day_Second.equals("수")){
+					count2(3, u);
+				}
+				if(list_base_base.get(count_subject).get(u).Day_Second.equals("목")){
+					count2(4, u);
+				}
+				if(list_base_base.get(count_subject).get(u).Day_Second.equals("금")){
+					count2(5, u);
+				}
+						}
+
+			}
+
+
+if(e.getSource()==RightButton) {
+	count_subject++;
+
+	if(count_subject==list_base_base.size()) {
+		count_subject=0;
+	}
+
+for(int y=0; y<9; y++) {
+	for(int i=1; i<6 ; i++) {
+contect[y][i]="";
+	}
+}
+	for(int u=0 ; u<list_base_base.get(0).size(); u++) {
+		if(list_base_base.get(count_subject).get(u).Day_first.equals("월")){
+count(1, u);
+		}
+if(list_base_base.get(count_subject).get(u).Day_first.equals("화")){
+	count(2, u);
+		}
+if(list_base_base.get(count_subject).get(u).Day_first.equals("수")){
+	count(3, u);
+}
+if(list_base_base.get(count_subject).get(u).Day_first.equals("목")){
+	count(4, u);
+}
+if(list_base_base.get(count_subject).get(u).Day_first.equals("금")){
+	count(5, u);
+}
+if(list_base_base.get(count_subject).get(u).Day_Second.equals("월")){
+	count2(1, u);
+}
+if(list_base_base.get(count_subject).get(u).Day_Second.equals("화")){
+	count2(2, u);
+}
+if(list_base_base.get(count_subject).get(u).Day_Second.equals("수")){
+	count2(3, u);
+}
+if(list_base_base.get(count_subject).get(u).Day_Second.equals("목")){
+	count2(4, u);
+}
+if(list_base_base.get(count_subject).get(u).Day_Second.equals("금")){
+	count2(5, u);
+}
+		}
+}
+		}
+
 	}
 
 }
