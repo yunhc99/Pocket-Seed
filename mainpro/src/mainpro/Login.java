@@ -25,7 +25,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class Login extends JFrame{
+public class Login extends JFrame {
 
 	private Image screenImage;// 이미지를 담는거
 	private Graphics screenGraphic;
@@ -33,11 +33,9 @@ public class Login extends JFrame{
 	private Image Background = new ImageIcon(Main.class.getResource("../image/LoginBack.png")).getImage();
 	private JLabel meunBar = new JLabel(new ImageIcon(Main.class.getResource("../image/menuBar.png")));
 
-
 	private ImageIcon LoginButtonBasicImage = new ImageIcon(Main.class.getResource("../image/LoginButtonBasic.png"));
 	private ImageIcon LoginButtonEnterImage = new ImageIcon(Main.class.getResource("../image/LoginButtonEnter.png"));
 	private ImageIcon SignUpButtonImage = new ImageIcon(Main.class.getResource("../image/SignUpButton.png"));
-
 
 	// 이미지 크기 변환
 	Image LoginB = LoginButtonBasicImage.getImage();
@@ -48,30 +46,24 @@ public class Login extends JFrame{
 	Image changeImgE = LoginE.getScaledInstance(480, 50, Image.SCALE_SMOOTH);
 	ImageIcon LoginButtonEnterImage_E = new ImageIcon(changeImgE);
 
-	private JButton LoginButton =new JButton(LoginButtonBasicImage_c);
-	private JButton SignUpButton =new JButton(SignUpButtonImage);
+	private JButton LoginButton = new JButton(LoginButtonBasicImage_c);
+	private JButton SignUpButton = new JButton(SignUpButtonImage);
 	//
-
 
 	private Font fon1 = new Font("굴림", Font.PLAIN, 30);
 
-
-	private JTextField TFId =new JTextField(){
+	private JTextField TFId = new JTextField() {
 		public void setBorder(Border border) { // textfield에 대한 테두리 투명화
 
 		}
 	};
-	private JPasswordField TFPass =new JPasswordField(){
+	private JPasswordField TFPass = new JPasswordField() {
 		public void setBorder(Border border) { // textfield에 대한 테두리 투명화
 
 		}
 	};
-
-
 
 	private int mouseX, mouseY;
-
-
 
 	public Login() {
 		setUndecorated(true);// 실행시 메뉴바 안보이기
@@ -88,99 +80,94 @@ public class Login extends JFrame{
 		meunBar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				mouseX= e.getX();
-				mouseY= e.getY();
+				mouseX = e.getX();
+				mouseY = e.getY();
 			}
 
 		});
 		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				int x=e.getXOnScreen();
-				int y=e.getYOnScreen();
-				setLocation(x-mouseX, y-mouseY);
+				int x = e.getXOnScreen();
+				int y = e.getYOnScreen();
+				setLocation(x - mouseX, y - mouseY);
 			}
 		});
 		add(meunBar);
 
-		LoginButton.setBounds(60, 800, 480, 50);//위치 지정
+		LoginButton.setBounds(60, 800, 480, 50);// 위치 지정
 		LoginButton.setBorderPainted(false);
 		LoginButton.setContentAreaFilled(false);
 		LoginButton.setFocusPainted(false);
 		LoginButton.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e){
+			public void mousePressed(MouseEvent e) {
 				System.out.print("로그인 기능\n");
-				//패스워드 보안상 변환과정
+				// 패스워드 보안상 변환과정
 				String pw = "";
 				String id = "";
-				char[] secret_pw=TFPass.getPassword();//필드에서 패스워드를 얻어옴, char[] 배열에 저장
-				for(char cha : secret_pw){ //secret_pw 배열에 저장된 암호의 자릿수 만큼 for문 돌리면서 cha에 한 글자씩 저장
+				char[] secret_pw = TFPass.getPassword();// 필드에서 패스워드를 얻어옴, char[] 배열에 저장
+				for (char cha : secret_pw) { // secret_pw 배열에 저장된 암호의 자릿수 만큼 for문 돌리면서 cha에 한 글자씩 저장
 					Character.toString(cha);
-					//pw 에 저장하기, pw 에 값이 비어있으면 저장, 값이 있으면 이어서 저장하는 삼항연산자
-					pw += (pw.equals("")) ? ""+cha+"" : ""+cha+"";
+					// pw 에 저장하기, pw 에 값이 비어있으면 저장, 값이 있으면 이어서 저장하는 삼항연산자
+					pw += (pw.equals("")) ? "" + cha + "" : "" + cha + "";
 				}
-				id=TFId.getText();
-				System.out.print(id +"\n");
+				id = TFId.getText();
+				System.out.print(id + "\n");
 				System.out.print(pw + "\n");
 				TFId.setText("");
 				TFPass.setText("");
 
-				//DB연동 시작
+				// DB연동 시작
 				Connection conn = null;
-		        Statement stmt = null;
-		        try{
-		            Class.forName("com.mysql.cj.jdbc.Driver");
+				Statement stmt = null;
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
 
-		            conn = DriverManager.getConnection(Main.url, Main.id, Main.pw);
+					conn = DriverManager.getConnection(Main.url, Main.id, Main.pw);
 
+					// DB와 연결된 conn 객체로부터 Statement 객체 획득.
+					stmt = conn.createStatement();
 
-		            //DB와 연결된 conn 객체로부터 Statement 객체 획득.
-		            stmt = conn.createStatement();
+					// query 만들기
+					String Seach = "SELECT * FROM user WHERE id LIKE '" + id + "'";
+					ResultSet result = stmt.executeQuery(Seach);
+					if (result.next()) {
+						if (pw.equals(result.getString("pass"))) {
+							System.out.println("Login Success");
+							JOptionPane.showMessageDialog(null, "로그인 성공!");
+							new SubList();
+							dispose();
+						} else {
+							System.out.println("pass fail");
+							JOptionPane.showMessageDialog(null, "패스워드가 틀렸습니다. 다시 입력해주세요");
+						}
+					} else {
+						System.out.println("id fail");
+						JOptionPane.showMessageDialog(null, "아이디가 틀렸습니다. 다시 입력해주세요");
+					}
+					// query문 날리기
+					System.out.println("Success end");
+				}
 
-		            //query 만들기
-		            String Seach= "SELECT * FROM user WHERE id LIKE '"+id+"'";
-		            ResultSet result = stmt.executeQuery(Seach);
-		           if(result.next()) {
-		        	   if(pw.equals(result.getString("pass"))) {
-		        		   System.out.println("Login Success");
-		        		   JOptionPane.showMessageDialog(null, "로그인 성공!");
-		        		   new SubList();
-		        		   dispose();
-		        	   }else {
-		        		   System.out.println("pass fail");
-		        		   JOptionPane.showMessageDialog(null, "패스워드가 틀렸습니다. 다시 입력해주세요");
-		        	   }
-		           }else {
-		        	   System.out.println("id fail");
-		        	   JOptionPane.showMessageDialog(null, "아이디가 틀렸습니다. 다시 입력해주세요");
-		           }
-		            //query문 날리기
-		            System.out.println("Success end");
-		        }
+				catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} finally {
+					try {
+						// 자원 해제
+						if (conn != null && !conn.isClosed())
+							conn.close();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
 
-		        catch(ClassNotFoundException e1){
-		            e1.printStackTrace();
-		        }
-		        catch(SQLException e1){
-		            e1.printStackTrace();
-		        }
-		        finally{
-		            try{
-		                //자원 해제
-		                if(conn != null && !conn.isClosed())
-		                    conn.close();
-		            } catch(SQLException e1){
-		                e1.printStackTrace();
-		            }
-		        }
-
-
-
-			}//로그인 이벤트 끝
+			}// 로그인 이벤트 끝
 		});
 		add(LoginButton);
-	    LoginButton.addActionListener(new action()); // 로그인 버튼 액션 이벤트 부여
+		LoginButton.addActionListener(new action()); // 로그인 버튼 액션 이벤트 부여
 
 		SignUpButton.setBounds(420, 565, 100, 40);
 		SignUpButton.setBorderPainted(false);
@@ -189,14 +176,16 @@ public class Login extends JFrame{
 		SignUpButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				SignUpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
+				SignUpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));// 손가락 커서
 			}
+
 			@Override
-			public void mouseExited(MouseEvent e){
-				SignUpButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
+			public void mouseExited(MouseEvent e) {
+				SignUpButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));// 기본 커서
 			}
+
 			@Override
-			public void mousePressed(MouseEvent e){
+			public void mousePressed(MouseEvent e) {
 				System.out.print("회원가입 기능\n");
 				new Sign();
 				dispose();
@@ -205,15 +194,16 @@ public class Login extends JFrame{
 		add(SignUpButton);
 		SignUpButton.addActionListener(new action()); // 회원가입 버튼 액션 이벤트 부여
 
-		TFId.setBounds(65,605,470,45);
+		TFId.setBounds(65, 605, 470, 45);
 		TFId.setFont(fon1);
 		add(TFId);
 
-		TFPass.setBounds(65,715,470,45);
+		TFPass.setBounds(65, 715, 470, 45);
 		TFPass.setFont(fon1);
 		add(TFPass);
 
 	}
+
 	public void paint(Graphics g) {
 		screenImage = createImage(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
 		screenGraphic = screenImage.getGraphics();
@@ -228,14 +218,14 @@ public class Login extends JFrame{
 		this.repaint();
 	}
 
-	public class action implements ActionListener{
+	public class action implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-if(e.getSource()==SignUpButton) {
-	new Sign();
-	dispose();
-}
+			if (e.getSource() == SignUpButton) {
+				new Sign();
+				dispose();
+			}
 		}
 
 	}

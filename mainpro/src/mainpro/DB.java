@@ -22,13 +22,13 @@ public class DB {
 	ArrayList<String> People = new ArrayList<String>();
 	ArrayList<String> Grade = new ArrayList<String>();
 	ArrayList<String> Result_list = new ArrayList<String>();
-	
+
 	Connection con = null;
 	Statement stmt = null;
 	String url = "jdbc:mysql://localhost/sublist?serverTimezone=UTC";
 	String user = "root";
 	String passwd = "1111";
-	
+
 	DB() {
 
 		try {
@@ -85,11 +85,11 @@ public class DB {
 					Result_list.add(Name.get(i)+ "  " + Day1.get(i) + " " + Day1_date1.get(i) + "," + Day1_date2.get(i) + " / "+ Day2.get(i) + " " + Day2_date1.get(i) + "," + Day2_date2.get(i) + "  " + "학점: " + Grade.get(i) + "  인원: " + People.get(i));
 				}
 			}
-			
+
 		} catch (SQLException ex) {
 			System.err.println("Select 오류: " + ex.getMessage());
 		}
 
 	}
-	
+
 }

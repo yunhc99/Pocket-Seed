@@ -35,9 +35,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-
-
-public class ConditionIN extends JFrame{
+public class ConditionIN extends JFrame {
 
 	// 버튼 위치
 	int N_S_button_Weight = 75;
@@ -46,12 +44,12 @@ public class ConditionIN extends JFrame{
 	int B_S_button_High = 30;
 	//
 
-	//과목 정보들
-	ArrayList<Sub_dater> information_nec ;
-	ArrayList<Sub_dater> information_sel ;
+	// 과목 정보들
+	ArrayList<Sub_dater> information_nec;
+	ArrayList<Sub_dater> information_sel;
 	ArrayList<Sub_dater> information_sum;
 	Sub_dater sub_dater;
-    Day_dater day_dater = new Day_dater();
+	Day_dater day_dater = new Day_dater();
 	//
 
 	private Image screenImage;// 이미지를 담는거
@@ -61,13 +59,20 @@ public class ConditionIN extends JFrame{
 	private JLabel meunBar = new JLabel(new ImageIcon(Main.class.getResource("../image/menuBar.png")));
 
 	private ImageIcon BackButtonImage = new ImageIcon(Main.class.getResource("../image/ConditionBackButton.png"));
-	private ImageIcon BackButtonEnterImage = new ImageIcon(Main.class.getResource("../image/ConditionBackButtonEnter.png"));
-	private ImageIcon EndSeachButtonImage = new ImageIcon(Main.class.getResource("../image/ConditionEndSeachButton.png"));
-	private ImageIcon EndSeachButtonEnterImage = new ImageIcon(Main.class.getResource("../image/ConditionEndSeachButtonEnter.png"));
-	private ImageIcon NecessarySubButtonImage = new ImageIcon(Main.class.getResource("../image/ConditionNecessarySubButton.png"));
-	private ImageIcon NecessarySubButtonEnterImage = new ImageIcon(Main.class.getResource("../image/ConditionNecessarySubButtonEnter.png"));
-	private ImageIcon SelectSubButtonImage = new ImageIcon(Main.class.getResource("../image/ConditionSelectSubButton.png"));
-	private ImageIcon SelectSubButtonEnterImage = new ImageIcon(Main.class.getResource("../image/ConditionSelectSubButtonEnter.png"));
+	private ImageIcon BackButtonEnterImage = new ImageIcon(
+			Main.class.getResource("../image/ConditionBackButtonEnter.png"));
+	private ImageIcon EndSeachButtonImage = new ImageIcon(
+			Main.class.getResource("../image/ConditionEndSeachButton.png"));
+	private ImageIcon EndSeachButtonEnterImage = new ImageIcon(
+			Main.class.getResource("../image/ConditionEndSeachButtonEnter.png"));
+	private ImageIcon NecessarySubButtonImage = new ImageIcon(
+			Main.class.getResource("../image/ConditionNecessarySubButton.png"));
+	private ImageIcon NecessarySubButtonEnterImage = new ImageIcon(
+			Main.class.getResource("../image/ConditionNecessarySubButtonEnter.png"));
+	private ImageIcon SelectSubButtonImage = new ImageIcon(
+			Main.class.getResource("../image/ConditionSelectSubButton.png"));
+	private ImageIcon SelectSubButtonEnterImage = new ImageIcon(
+			Main.class.getResource("../image/ConditionSelectSubButtonEnter.png"));
 
 	Image BACK = BackButtonImage.getImage();
 	Image changeImgB = BACK.getScaledInstance(B_S_button_Weight, B_S_button_High, Image.SCALE_SMOOTH);
@@ -101,32 +106,31 @@ public class ConditionIN extends JFrame{
 	Image changeImgSE_E = SELECT_E.getScaledInstance(N_S_button_Weight, N_S_button_High, Image.SCALE_SMOOTH);
 	ImageIcon SELECT_ButtonImage_E = new ImageIcon(changeImgSE_E);
 
-	private JButton BackButton=new JButton(BACK_ButtonImage);
-	private JButton EndSeachButton=new JButton(SEARCH_ButtonImage);
-	private JButton NecessarySubButton=new JButton(NEC_ButtonImage);
-	private JButton SelectSubButton=new JButton(SELECT_ButtonImage);
+	private JButton BackButton = new JButton(BACK_ButtonImage);
+	private JButton EndSeachButton = new JButton(SEARCH_ButtonImage);
+	private JButton NecessarySubButton = new JButton(NEC_ButtonImage);
+	private JButton SelectSubButton = new JButton(SELECT_ButtonImage);
 
 	JList nec_list;
-    JList sel_list;
-    JList sum_list;
-    DefaultListModel sel_model;
-    DefaultListModel nec_model;
-    DefaultListModel sum_model;
+	JList sel_list;
+	JList sum_list;
+	DefaultListModel sel_model;
+	DefaultListModel nec_model;
+	DefaultListModel sum_model;
 
-    //체크박스
-    JCheckBox monday = new JCheckBox("월요일", false) ;
+	// 체크박스
+	JCheckBox monday = new JCheckBox("월요일", false);
 
-    JCheckBox tuesday = new JCheckBox("화요일", false);
-    JCheckBox wednesday = new JCheckBox("수요일", false);
-    JCheckBox thursday = new JCheckBox("목요일", false);
-    JCheckBox friday = new JCheckBox("금요일", false);
-    //
+	JCheckBox tuesday = new JCheckBox("화요일", false);
+	JCheckBox wednesday = new JCheckBox("수요일", false);
+	JCheckBox thursday = new JCheckBox("목요일", false);
+	JCheckBox friday = new JCheckBox("금요일", false);
+	//
 
-
-    //학점
-	private JTextField GradesF= new JTextField() {
-public void setBorder(Border border) { // 테두리 투명화
-}
+	// 학점
+	private JTextField GradesF = new JTextField() {
+		public void setBorder(Border border) { // 테두리 투명화
+		}
 	};
 	//
 
@@ -145,26 +149,26 @@ public void setBorder(Border border) { // 테두리 투명화
 		setBackground(new Color(0, 0, 0, 0)); // 컴포넌트의 배경이 하얀색
 		setLayout(null);
 
-		  Dimension frameSize = getSize();
-	        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension frameSize = getSize();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-	        setLocation((screenSize.width - frameSize.width)/2,(screenSize.height - frameSize.height)/2);
+		setLocation((screenSize.width - frameSize.width) / 2, (screenSize.height - frameSize.height) / 2);
 
 		meunBar.setBounds(0, 0, 800, 30);
 		meunBar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				mouseX= e.getX();
-				mouseY= e.getY();
+				mouseX = e.getX();
+				mouseY = e.getY();
 			}
 
 		});
 		meunBar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				int x=e.getXOnScreen();
-				int y=e.getYOnScreen();
-				setLocation(x-mouseX, y-mouseY);
+				int x = e.getXOnScreen();
+				int y = e.getYOnScreen();
+				setLocation(x - mouseX, y - mouseY);
 			}
 		});
 		add(meunBar);
@@ -175,30 +179,30 @@ public void setBorder(Border border) { // 테두리 투명화
 		nec_list = new JList(new DefaultListModel());
 		JScrollPane nec_scroll = new JScrollPane(nec_list) {
 			public void setBorder(Border border) { // 테두리 투명화
-		}
-			};
+			}
+		};
 		JScrollPane sel_scroll = new JScrollPane(sel_list) {
-				public void setBorder(Border border) { // 테두리 투명화
+			public void setBorder(Border border) { // 테두리 투명화
 
-		}
+			}
 		};
 
 		add(nec_scroll);
 		add(sel_scroll);
 
-		nec_model = (DefaultListModel)nec_list.getModel();
-		sel_model = (DefaultListModel)sel_list.getModel();
-		sum_model = (DefaultListModel)sum_list.getModel();
+		nec_model = (DefaultListModel) nec_list.getModel();
+		sel_model = (DefaultListModel) sel_list.getModel();
+		sum_model = (DefaultListModel) sum_list.getModel();
 
 		nec_scroll.setBounds(355, 175, 200, 340);
-sel_scroll.setBounds(45, 175, 200, 340);
+		sel_scroll.setBounds(45, 175, 200, 340);
 		//
 
-monday.setBackground(Color.WHITE);
-tuesday.setBackground(Color.WHITE);
-wednesday.setBackground(Color.WHITE);
-thursday.setBackground(Color.WHITE);
-friday.setBackground(Color.WHITE);
+		monday.setBackground(Color.WHITE);
+		tuesday.setBackground(Color.WHITE);
+		wednesday.setBackground(Color.WHITE);
+		thursday.setBackground(Color.WHITE);
+		friday.setBackground(Color.WHITE);
 
 		// 필수 화살표 버튼
 		NecessarySubButton.setBounds(265, 250, N_S_button_Weight, N_S_button_High);
@@ -209,20 +213,22 @@ friday.setBackground(Color.WHITE);
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				NecessarySubButton.setIcon(NEC_ButtonImage_E);
-				NecessarySubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
+				NecessarySubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));// 손가락 커서
 			}
+
 			@Override
-			public void mouseExited(MouseEvent e){
+			public void mouseExited(MouseEvent e) {
 				NecessarySubButton.setIcon(NEC_ButtonImage);
-				NecessarySubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
+				NecessarySubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));// 기본 커서
 			}
+
 			@Override
-			public void mousePressed(MouseEvent e){
+			public void mousePressed(MouseEvent e) {
 				System.out.print("필수과목 기능\n");
 			}
 		});
 		add(NecessarySubButton);
-	    NecessarySubButton.addActionListener(new action());
+		NecessarySubButton.addActionListener(new action());
 		//
 
 		// 선택 화살표 버튼
@@ -234,15 +240,17 @@ friday.setBackground(Color.WHITE);
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				SelectSubButton.setIcon(SELECT_ButtonImage_E);
-				SelectSubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
+				SelectSubButton.setCursor(new Cursor(Cursor.HAND_CURSOR));// 손가락 커서
 			}
+
 			@Override
-			public void mouseExited(MouseEvent e){
+			public void mouseExited(MouseEvent e) {
 				SelectSubButton.setIcon(SELECT_ButtonImage);
-				SelectSubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
+				SelectSubButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));// 기본 커서
 			}
+
 			@Override
-			public void mousePressed(MouseEvent e){
+			public void mousePressed(MouseEvent e) {
 				System.out.print("선택과목 기능\n");
 			}
 		});
@@ -259,15 +267,17 @@ friday.setBackground(Color.WHITE);
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				EndSeachButton.setIcon(SEARCH_ButtonImage_E);
-				EndSeachButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
+				EndSeachButton.setCursor(new Cursor(Cursor.HAND_CURSOR));// 손가락 커서
 			}
+
 			@Override
-			public void mouseExited(MouseEvent e){
+			public void mouseExited(MouseEvent e) {
 				EndSeachButton.setIcon(SEARCH_ButtonImage);
-				EndSeachButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
+				EndSeachButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));// 기본 커서
 			}
+
 			@Override
-			public void mousePressed(MouseEvent e){
+			public void mousePressed(MouseEvent e) {
 				System.out.print("검색 기능\n");
 			}
 		});
@@ -284,15 +294,17 @@ friday.setBackground(Color.WHITE);
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				BackButton.setIcon(BACK_ButtonImage_E);
-				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
+				BackButton.setCursor(new Cursor(Cursor.HAND_CURSOR));// 손가락 커서
 			}
+
 			@Override
-			public void mouseExited(MouseEvent e){
+			public void mouseExited(MouseEvent e) {
 				BackButton.setIcon(BACK_ButtonImage);
-				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
+				BackButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));// 기본 커서
 			}
+
 			@Override
-			public void mousePressed(MouseEvent e){
+			public void mousePressed(MouseEvent e) {
 				System.out.print("뒤로 기능\n");
 			}
 		});
@@ -300,20 +312,20 @@ friday.setBackground(Color.WHITE);
 		BackButton.addActionListener(new action());
 		//
 
-		//학점 텍스트
+		// 학점 텍스트
 		GradesF.setBounds(60, 725, 500, 45);
-	    GradesF.setFont(fon1);
+		GradesF.setFont(fon1);
 		add(GradesF);
 		//
 
-		//체크박스 관리
+		// 체크박스 관리
 		add(monday);
 		add(tuesday);
 		add(wednesday);
 		add(thursday);
 		add(friday);
 
-		//체크박스 이벤트 부여
+		// 체크박스 이벤트 부여
 		monday.addItemListener(new Listen());
 		tuesday.addItemListener(new Listen());
 		wednesday.addItemListener(new Listen());
@@ -328,127 +340,113 @@ friday.setBackground(Color.WHITE);
 		friday.setBounds(468, 597, 65, 48);
 //
 
-
 	}
 
-	public class action implements ActionListener{
+	public class action implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource()==SelectSubButton) { // 선택 화살표 클릭
+			if (e.getSource() == SelectSubButton) { // 선택 화살표 클릭
 				sel_model.addElement(nec_list.getSelectedValue());
 				nec_model.removeElement(nec_list.getSelectedValue());
-			}
-			else if(e.getSource()==NecessarySubButton) { // 필수 화살표 클릭
+			} else if (e.getSource() == NecessarySubButton) { // 필수 화살표 클릭
 				nec_model.addElement(sel_list.getSelectedValue());
 				sel_model.removeElement(sel_list.getSelectedValue());
 			}
 
-			else if(e.getSource()==BackButton) {
+			else if (e.getSource() == BackButton) {
 
 				new SubList();
 				dispose();
 
 			}
 
-			else if(e.getSource()==EndSeachButton) { // 검색 버튼 클릭
+			else if (e.getSource() == EndSeachButton) { // 검색 버튼 클릭
 				information_nec = new ArrayList<>();
 				information_sel = new ArrayList<>();
-				day_dater.subject_check_num = Integer.valueOf(GradesF.getText()); //학점
-				//System.out.println(day_dater.subject_check_num);
-				for(int i=0;i<nec_model.getSize();i++) {
-					information_nec.add(new Sub_dater((String) nec_model.getElementAt(i))); //필수
+				day_dater.subject_check_num = Integer.valueOf(GradesF.getText()); // 학점
+				// System.out.println(day_dater.subject_check_num);
+				for (int i = 0; i < nec_model.getSize(); i++) {
+					information_nec.add(new Sub_dater((String) nec_model.getElementAt(i))); // 필수
 					sum_model.addElement((String) nec_model.getElementAt(i));
 				}
 
-				for(int h=0;h<sel_model.getSize();h++) {
-					information_sel.add(new Sub_dater((String) sel_model.getElementAt(h))); //선택
+				for (int h = 0; h < sel_model.getSize(); h++) {
+					information_sel.add(new Sub_dater((String) sel_model.getElementAt(h))); // 선택
 					sum_model.addElement((String) sel_model.getElementAt(h));
 
 				}
 
-
 				Result_process nec_result = new Result_process(information_nec, day_dater);
-				if(nec_result.grade_check!=1) {
-			    Result_process_select sel_result = new Result_process_select(information_sel, day_dater, nec_result.select_grade);
+				if (nec_result.grade_check != 1) {
+					Result_process_select sel_result = new Result_process_select(information_sel, day_dater,
+							nec_result.select_grade);
 
-			    if(sel_result.list_base.size()!=0) {
-			    Result result = new Result(nec_result.list_base, sel_result.list_base);
-			    if(result.list_base.size()!=0) {
-				   new Outcome(result.list_base, information_nec, information_sel, sum_model);
-				   dispose();
-			    }
-			    if(result.list_base.size()==0) {
-			    JOptionPane.showMessageDialog(null, "조건에 맞는 과목이 없습니다.");
-			    }
-			    }
-			    else {
-			    	if(nec_result.list_base.size()!=0&&nec_result.sub_grade==day_dater.subject_check_num) {
-			    	new Outcome(nec_result.list_base, information_nec, information_sel, sum_model);
-			    	  dispose();
-			    	}
-			    if(nec_result.list_base.size()==0&&nec_result.sub_grade!=day_dater.subject_check_num) {
-			    	JOptionPane.showMessageDialog(null, "조건에 맞는 과목이 없거나 학점이 맞지 않습니다.");
-			    }
-			    }
+					if (sel_result.list_base.size() != 0) {
+						Result result = new Result(nec_result.list_base, sel_result.list_base);
+						if (result.list_base.size() != 0) {
+							new Outcome(result.list_base, information_nec, information_sel, sum_model);
+							dispose();
+						}
+						if (result.list_base.size() == 0) {
+							JOptionPane.showMessageDialog(null, "조건에 맞는 과목이 없습니다.");
+						}
+					} else {
+						if (nec_result.list_base.size() != 0 && nec_result.sub_grade == day_dater.subject_check_num) {
+							new Outcome(nec_result.list_base, information_nec, information_sel, sum_model);
+							dispose();
+						}
+						if (nec_result.list_base.size() == 0 && nec_result.sub_grade != day_dater.subject_check_num) {
+							JOptionPane.showMessageDialog(null, "조건에 맞는 과목이 없거나 학점이 맞지 않습니다.");
+						}
+					}
 
 				}
-				if(nec_result.grade_check==1) {
+				if (nec_result.grade_check == 1) {
 					JOptionPane.showMessageDialog(null, "필수학점이 조건학점을 넘습니다.");
 				}
 
-
 			}
 		}
 	}
 
-	public class Listen implements ItemListener{ //체크박스 관리
+	public class Listen implements ItemListener { // 체크박스 관리
 
 		@Override
 		public void itemStateChanged(ItemEvent e) {
-			if(e.getItem()==monday) { // 월요일 체크박스 클릭 처리
-				if(e.getStateChange()== ItemEvent.SELECTED) {
+			if (e.getItem() == monday) { // 월요일 체크박스 클릭 처리
+				if (e.getStateChange() == ItemEvent.SELECTED) {
 					day_dater.monday = true;
-				}
-				else {
+				} else {
 					day_dater.monday = false;
 				}
-			}
-             else if(e.getItem()==tuesday) { // 화요일 체크박스 클릭 처리
-	if(e.getStateChange()== ItemEvent.SELECTED) {
-		day_dater.tuesday = true;
-	}
-	else {
-		day_dater.tuesday = false;
-	}
-			}
-			else if(e.getItem()==wednesday) { // 수요일 체크박스 클릭 처리
-				if(e.getStateChange()== ItemEvent.SELECTED) {
-					day_dater.wednesday = true;
+			} else if (e.getItem() == tuesday) { // 화요일 체크박스 클릭 처리
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					day_dater.tuesday = true;
+				} else {
+					day_dater.tuesday = false;
 				}
-				else {
+			} else if (e.getItem() == wednesday) { // 수요일 체크박스 클릭 처리
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					day_dater.wednesday = true;
+				} else {
 					day_dater.wednesday = false;
 				}
+			} else if (e.getItem() == thursday) { // 목요일 체크박스 클릭 처리
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					day_dater.thursday = true;
+				} else {
+					day_dater.thursday = false;
+				}
+			} else if (e.getItem() == friday) { // 금요일 체크박스 클릭 처리
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					day_dater.friday = true;
+				} else {
+					day_dater.friday = false;
+				}
 			}
-    else if(e.getItem()==thursday) { // 목요일 체크박스 클릭 처리
-	if(e.getStateChange()== ItemEvent.SELECTED) {
-		day_dater.thursday = true;
-	}
-	else {
-		day_dater.thursday = false;
-	}
-			}
-    else if(e.getItem()==friday) { // 금요일 체크박스 클릭 처리
-	if(e.getStateChange()== ItemEvent.SELECTED) {
-		day_dater.friday = true;
-	}
-	else {
-		day_dater.friday = false;
-	}
-          }
 		}
 	}
-
 
 	public void paint(Graphics g) {
 		screenImage = createImage(800, 900);

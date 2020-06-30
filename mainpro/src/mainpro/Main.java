@@ -8,14 +8,8 @@ public class Main {
 	public static final String id = "root";
 	public static final String pw = "1111";
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		new Login();
-		//new Sign();
-		//new SubList();
-		//new ConditionIN();
-		//new Outcome();
-		//new Sub_dater();
-		//new DB();
+
 	}
 }

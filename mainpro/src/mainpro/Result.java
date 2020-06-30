@@ -2,53 +2,19 @@ package mainpro;
 
 import java.util.ArrayList;
 
-public class Result_process {
-	int grade_check = 0;
+public class Result {
 	Sub_dater sub_dater;
 	Day_dater day_dater;
+	ArrayList<ArrayList<ArrayList<Sub_dater>>> list_base_base;
+	ArrayList<ArrayList<ArrayList<Sub_dater>>> list_re;
 	ArrayList<ArrayList<Sub_dater>> list_base;
-	ArrayList<Sub_dater> list = new ArrayList<>();
-	int sub_grade = 0;
-	int select_grade = 0;
-	ArrayList<Sub_dater> information;
-	// static boolean visit[] = new boolean[arr.length];
+	ArrayList<Sub_dater> sub;
+	ArrayList<ArrayList<Sub_dater>> list = new ArrayList<>();
 	ArrayList<Sub_dater> vi;
 
-	public Result_process(ArrayList<Sub_dater> A, Day_dater B) {
+	public Result(ArrayList<ArrayList<Sub_dater>> A, ArrayList<ArrayList<Sub_dater>> B) {
 
 		list_base = new ArrayList<>();
-		day_dater = new Day_dater();
-		day_dater = B;
-
-		information = new ArrayList<>();
-		int check = 0;
-
-		// 중복없는 목록 과목 담기, 필수 학점 계산
-		for (int i = 0; i < A.size(); i++) {
-			for (int v = 0; v < information.size(); v++) {
-				if (information.get(v).subject_name.equals(A.get(i).subject_name)) {
-					check = 1;
-				}
-			}
-			if (check != 1) {
-				information.add(A.get(i));
-			}
-			check = 0;
-		}
-		//
-
-		for (int i = 0; i < information.size(); i++) {
-			sub_dater = new Sub_dater();
-			sub_dater = information.get(i);
-			sub_grade += Integer.valueOf(sub_dater.Sub_num);
-		}
-
-		if (sub_grade > day_dater.subject_check_num) {
-			grade_check = 1;
-			return;
-		}
-
-		select_grade = day_dater.subject_check_num - sub_grade;
 
 		// 리스트에 과목박스들 담기
 		for (int v = 0; v < A.size(); v++) {
@@ -56,53 +22,75 @@ public class Result_process {
 		}
 		//
 
-		// 조합 구하기
-		Combination c = new Combination(list);
-		c.doCombination(list.size(), information.size(), 0);
-		//
-
-		// 조합 결과 받기
-		for (int v = 0; v < c.list.size(); v++) {
-			list_base.add(c.list.get(v));
+		// 리스트에 과목박스들 담기
+		for (int v = 0; v < B.size(); v++) {
+			list.add(B.get(v));
 		}
 		//
 
-		Holiday(); // 공강시간대
-		score(); // 과목 학점 일치
-		Same(); // 중복되어 있는 과목
-		Same_Time(); // 시간이 겹치는 과목
-		Sub_Check(); // 과목 존재여부
+		// 조합 구하기
+		Combination_Result c = new Combination_Result(list);
+		c.doCombination(list.size(), 2, 0);
+		//
 
-	}
+		list_base_base = c.list;
 
-	// 과목 전부 존재 체크
-	public void Sub_Check() {
-		ArrayList<String> member; // member는 과목의 조합
-		int check_zone = 0;
-		for (int v = list_base.size() - 1; v >= 0; v--) {
-			member = new ArrayList<>();
-			for (int b = 0; b < list_base.get(v).size(); b++) {
-				member.add((list_base.get(v).get(b).subject_name));
-			}
+		for (int i = list_base_base.size() - 1; i >= 0; i--) {
 
-			for (int tv = 0; tv < information.size(); tv++) {
-				for (int tt = 0; tt < member.size(); tt++) {
-					if (member.get(tt).equals(information.get(tv).subject_name)) {
-						check_zone = 1;
+			int check = 0;
+			for (int y = 0; y < A.size(); y++) {
+				if (list_base_base.get(i).get(0).equals(A.get(y))) {
+					for (int h = 0; h < A.size(); h++) {
+						if (list_base_base.get(i).get(1).equals(A.get(h))) {
+							list_base_base.remove(i);
+							check = 1;
+
+							break;
+						}
 					}
-
 				}
-				if (check_zone != 1) {
-					check_zone = 0;
-					list_base.remove(v);
+				if (check == 1) {
 					break;
 				}
-				check_zone = 0;
 			}
-
 		}
+
+		for (int i = list_base_base.size() - 1; i >= 0; i--) {
+			int check = 0;
+
+			for (int u = 0; u < B.size(); u++) {
+				if (list_base_base.get(i).get(0).equals(B.get(u))) {
+					for (int h = 0; h < B.size(); h++) {
+						if (list_base_base.get(i).get(1).equals(B.get(h))) {
+							list_base_base.remove(i);
+							check = 1;
+
+							break;
+						}
+					}
+				}
+				if (check == 1) {
+					break;
+				}
+			}
+			check = 0;
+		}
+
+		for (int t = 0; t < list_base_base.size(); t++) {
+			sub = new ArrayList<>();
+			for (int h = 0; h < list_base_base.get(t).get(0).size(); h++) {
+				sub.add(list_base_base.get(t).get(0).get(h));
+			}
+			for (int h = 0; h < list_base_base.get(t).get(1).size(); h++) {
+				sub.add(list_base_base.get(t).get(1).get(h));
+			}
+			list_base.add(sub);
+		}
+
+		Same_Time();
+
+
 	}
-	//
 
 	// 중복시간 체크
 	public void Same_Time() {
@@ -399,107 +387,5 @@ public class Result_process {
 		}
 	}
 	//
-
-	// 중복과목 체크
-	public void Same() {
-		ArrayList<String> member; // member는 과목의 조합
-		int check_sub = 0;
-		for (int v = list_base.size() - 1; v >= 0; v--) {
-			member = new ArrayList<>();
-			for (int b = 0; b < list_base.get(v).size(); b++) {
-				member.add((list_base.get(v).get(b).subject_name));
-			}
-
-			for (int b = 0; b < list_base.get(v).size(); b++) {
-				if ((b + 1) != list_base.get(v).size()) {
-					for (int t = b + 1; t < list_base.get(v).size(); t++) {
-						if (member.get(b).equals(member.get(t))) {
-							list_base.remove(v);
-							check_sub = 1;
-							break;
-						}
-					}
-				}
-				if (check_sub == 1) {
-					check_sub = 0;
-					break;
-				}
-			}
-		}
-	}
-	//
-
-	// 학점체크
-	public void score() {
-		ArrayList<Integer> member; // member는 과목의 조합
-
-		for (int v = list_base.size() - 1; v >= 0; v--) {
-			int check = 0;
-			member = new ArrayList<>();
-			for (int b = 0; b < list_base.get(v).size(); b++) {
-				member.add(Integer.valueOf(list_base.get(v).get(b).Sub_num));
-			}
-
-			for (int b = 0; b < list_base.get(v).size(); b++) {
-				check += member.get(b);
-			}
-			if (check != sub_grade) {
-				list_base.remove(v);
-			}
-		}
-	}
-	//
-
-	// 공강체크
-	public void Holiday() { // list는 과목의 조합을 품은 조합
-		ArrayList<Sub_dater> member; // member는 과목의 조합
-		for (int v = list_base.size() - 1; v >= 0; v--) {
-			member = new ArrayList<>();
-			for (int b = 0; b < list_base.get(v).size(); b++) {
-				member.add(list_base.get(v).get(b));
-			}
-
-			for (int b = 0; b < list_base.get(v).size(); b++) {
-
-				Sub_dater hh = new Sub_dater(); // 과목
-				hh = member.get(b);
-
-				if (day_dater.monday == true) {
-
-					if (hh.Day_first.equals("월") || hh.Day_Second.equals("월")) {
-
-						list_base.remove(v);
-						break;
-					}
-				}
-				if (day_dater.tuesday == true) {
-					if (hh.Day_first.equals("화") || hh.Day_Second.equals("화")) {
-						list_base.remove(v);
-						break;
-					}
-				}
-				if (day_dater.wednesday == true) {
-					if (hh.Day_first.equals("수") || hh.Day_Second.equals("수")) {
-						list_base.remove(v);
-						break;
-					}
-				}
-				if (day_dater.thursday == true) {
-					if (hh.Day_first.equals("목") || hh.Day_Second.equals("목")) {
-						list_base.remove(v);
-						break;
-					}
-				}
-				if (day_dater.friday == true) {
-					if (hh.Day_first.equals("금") || hh.Day_Second.equals("금")) {
-						list_base.remove(v);
-						break;
-					}
-				}
-			}
-		} // 여기까지가 전체
-
-	}
-	// 여기까지가 공강 체크
 
 }
