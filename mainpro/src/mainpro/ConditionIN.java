@@ -25,6 +25,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
@@ -46,6 +47,7 @@ public class ConditionIN extends JFrame{
 	//과목 정보들
 	ArrayList<Sub_dater> information_nec ;
 	ArrayList<Sub_dater> information_sel ;
+	ArrayList<Sub_dater> information_sum;
 	Sub_dater sub_dater;
     Day_dater day_dater = new Day_dater();
 	//
@@ -104,8 +106,10 @@ public class ConditionIN extends JFrame{
 
 	JList nec_list;
     JList sel_list;
+    JList sum_list;
     DefaultListModel sel_model;
     DefaultListModel nec_model;
+    DefaultListModel sum_model;
 
     //체크박스
     JCheckBox monday = new JCheckBox("월요일", false) ;
@@ -159,8 +163,9 @@ public void setBorder(Border border) { // 테두리 투명화
 		add(meunBar);
 
 		// 필수 선택 창
-		nec_list = new JList(model);
-		sel_list = new JList(new DefaultListModel());
+		sum_list = new JList(new DefaultListModel());
+		sel_list = new JList(model);
+		nec_list = new JList(new DefaultListModel());
 		JScrollPane nec_scroll = new JScrollPane(nec_list) {
 			public void setBorder(Border border) { // 테두리 투명화
 		}
@@ -176,9 +181,10 @@ public void setBorder(Border border) { // 테두리 투명화
 
 		nec_model = (DefaultListModel)nec_list.getModel();
 		sel_model = (DefaultListModel)sel_list.getModel();
+		sum_model = (DefaultListModel)sum_list.getModel();
 
-		nec_scroll.setBounds(45, 175, 200, 340);
-sel_scroll.setBounds(355, 175, 200, 340);
+		nec_scroll.setBounds(355, 175, 200, 340);
+sel_scroll.setBounds(45, 175, 200, 340);
 		//
 
 monday.setBackground(Color.WHITE);
@@ -323,12 +329,19 @@ friday.setBackground(Color.WHITE);
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==SelectSubButton) { // 선택 화살표 클릭
+				sel_model.addElement(nec_list.getSelectedValue());
+				nec_model.removeElement(nec_list.getSelectedValue());
+			}
+			else if(e.getSource()==NecessarySubButton) { // 필수 화살표 클릭
 				nec_model.addElement(sel_list.getSelectedValue());
 				sel_model.removeElement(sel_list.getSelectedValue());
 			}
-			else if(e.getSource()==NecessarySubButton) { // 필수 화살표 클릭
-				sel_model.addElement(nec_list.getSelectedValue());
-				nec_model.removeElement(nec_list.getSelectedValue());
+
+			else if(e.getSource()==BackButton) {
+
+				new SubList();
+				dispose();
+
 			}
 
 			else if(e.getSource()==EndSeachButton) { // 검색 버튼 클릭
@@ -338,36 +351,45 @@ friday.setBackground(Color.WHITE);
 				//System.out.println(day_dater.subject_check_num);
 				for(int i=0;i<nec_model.getSize();i++) {
 					information_nec.add(new Sub_dater((String) nec_model.getElementAt(i))); //필수
+					sum_model.addElement((String) nec_model.getElementAt(i));
 				}
 
-				for(int i=0;i<sel_model.getSize();i++) {
-					information_sel.add(new Sub_dater((String) sel_model.getElementAt(i))); //선택
+				for(int h=0;h<sel_model.getSize();h++) {
+					information_sel.add(new Sub_dater((String) sel_model.getElementAt(h))); //선택
+					sum_model.addElement((String) sel_model.getElementAt(h));
+
 				}
 
-/*				System.out.println("월요일 : " + day_dater.monday);
-				System.out.println("화요일 : " + day_dater.tuesday);
-				System.out.println("수요일 : " + day_dater.wednesday);
-				System.out.println("목요일 : " + day_dater.thursday);
-				System.out.println("금요일 : " + day_dater.friday);
 
-				for(int i=0; i< information_nec.size() ; i++) {
-					sub_dater = information_nec.get(i);
-				System.out.println(sub_dater.subject_name + sub_dater.Day_first + sub_dater.Date_first_1 // 임시 출력
-						+ sub_dater.Date_first_2 + sub_dater.Date_first_3 + sub_dater.Day_Second + sub_dater.Date_Second_1
-						+ sub_dater.Date_Second_2 + sub_dater.Date_Second_3 + sub_dater.Sub_num + sub_dater.Sub_human);
+				Result_process nec_result = new Result_process(information_nec, day_dater);
+				if(nec_result.grade_check!=1) {
+			    Result_process_select sel_result = new Result_process_select(information_sel, day_dater, nec_result.select_grade);
+
+			    if(sel_result.list_base.size()!=0) {
+			    Result result = new Result(nec_result.list_base, sel_result.list_base);
+			    if(result.list_base.size()!=0) {
+				   new Outcome(result.list_base, sel_model, nec_model, sum_model);
+				   dispose();
+			    }
+			    if(result.list_base.size()==0) {
+			    JOptionPane.showMessageDialog(null, "조건에 맞는 과목이 없습니다.");
+			    }
+			    }
+			    else {
+			    	if(nec_result.list_base.size()!=0&&nec_result.sub_grade==day_dater.subject_check_num) {
+			    	new Outcome(nec_result.list_base, sel_model, nec_model, sum_model);
+			    	  dispose();
+			    	}
+			    if(nec_result.list_base.size()==0&&nec_result.sub_grade!=day_dater.subject_check_num) {
+			    	JOptionPane.showMessageDialog(null, "조건에 맞는 과목이 없거나 학점이 맞지 않습니다.");
+			    }
+			    }
+
+				}
+				if(nec_result.grade_check==1) {
+					JOptionPane.showMessageDialog(null, "필수학점이 조건학점을 넘습니다.");
 				}
 
-				System.out.println("----------------------------------");
-
-				for(int i=0; i< information_sel.size() ; i++) {
-
-					sub_dater = information_sel.get(i);
-					System.out.println(sub_dater.subject_name + sub_dater.Day_first + sub_dater.Date_first_1 // 임시 출력
-							+ sub_dater.Date_first_2 + sub_dater.Date_first_3 + sub_dater.Day_Second + sub_dater.Date_Second_1
-							+ sub_dater.Date_Second_2 + sub_dater.Date_Second_3 + sub_dater.Sub_num + sub_dater.Sub_human);
-					}
-	*/
-				new Result_process(information_nec, day_dater);
 
 			}
 		}
