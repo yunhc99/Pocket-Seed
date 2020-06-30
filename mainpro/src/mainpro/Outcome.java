@@ -1,36 +1,54 @@
 package mainpro;
 
 import java.awt.BorderLayout;
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Panel;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.TextArea;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class Outcome extends JFrame{
 
-	DefaultListModel sel_model;
-    DefaultListModel nec_model;
+	ArrayList<Sub_dater> information_nec ;
+	ArrayList<Sub_dater> information_sel ;
     DefaultListModel sum_model;
+
+    private Font fon1 = new Font("굴림", Font.PLAIN, 22);
+
 	private Image screenImage;// 이미지를 담는거
 	private Graphics screenGraphic;
 
@@ -114,11 +132,11 @@ public class Outcome extends JFrame{
 
 	private int mouseX, mouseY;
 
-	public Outcome(ArrayList<ArrayList<Sub_dater>> list_base_base, DefaultListModel sel_model, DefaultListModel nec_model,
+	public Outcome(ArrayList<ArrayList<Sub_dater>> list_base_base, ArrayList<Sub_dater> information_nec, ArrayList<Sub_dater> information_sel,
 			DefaultListModel sum_model) {
 
-		this.sel_model = sel_model;
-		this.nec_model = nec_model;
+		this.information_nec = information_nec;
+		this.information_sel = information_sel;
 		this.sum_model = sum_model;
 		this.list_base_base = list_base_base;
 
@@ -181,7 +199,6 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 	count2(5, u);
 }
 		}
-
 
 
 		JTable table = new JTable(contect, header);
@@ -284,7 +301,33 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 			}
 			@Override
 			public void mousePressed(MouseEvent e){
-				System.out.print("저장 기능\n");
+				  String saveFileExtension = "png";
+
+	              Dimension frameSize = getSize();
+	              Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+	              try {
+	                 setLocation((screenSize.width - frameSize.width)/2,(screenSize.height - frameSize.height)/2);
+	                  Robot robot = new Robot();
+	                  //Rectangle rectangle = new Rectangle(500, 500, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
+	                  Rectangle rectangle = new Rectangle((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2,
+	                        Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
+	                  BufferedImage image = robot.createScreenCapture(rectangle);
+	                  image.setRGB(0,0,100);
+
+	                  JFileChooser fileChooser = new JFileChooser();
+	                  fileChooser.setFileFilter(new FileNameExtensionFilter("*.png", "png"));
+	                  if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+	                      File file = fileChooser.getSelectedFile();
+	                      ImageIO.write(image, saveFileExtension, new File(file.getAbsolutePath()+"."+saveFileExtension));
+	                      JOptionPane.showMessageDialog(null, "이미지 저장 완료");
+	                  } else {
+	                      System.out.println("No file choosen!");
+	                  }
+
+	              }catch (Exception e1){
+	                  e1.printStackTrace();
+	              }
 			}
 		});
 		add(SaveButton);
@@ -309,6 +352,8 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 			public void mousePressed(MouseEvent e){
 				System.exit(0);
 			}
+
+
 		});
 		add(ExitButton);
 
@@ -557,6 +602,8 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 					count2(5, u);
 				}
 						}
+
+
 
 			}
 

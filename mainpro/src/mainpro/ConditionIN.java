@@ -4,10 +4,12 @@ import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -142,6 +144,11 @@ public void setBorder(Border border) { // 테두리 투명화
 		setVisible(true);
 		setBackground(new Color(0, 0, 0, 0)); // 컴포넌트의 배경이 하얀색
 		setLayout(null);
+
+		  Dimension frameSize = getSize();
+	        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+	        setLocation((screenSize.width - frameSize.width)/2,(screenSize.height - frameSize.height)/2);
 
 		meunBar.setBounds(0, 0, 800, 30);
 		meunBar.addMouseListener(new MouseAdapter() {
@@ -368,7 +375,7 @@ friday.setBackground(Color.WHITE);
 			    if(sel_result.list_base.size()!=0) {
 			    Result result = new Result(nec_result.list_base, sel_result.list_base);
 			    if(result.list_base.size()!=0) {
-				   new Outcome(result.list_base, sel_model, nec_model, sum_model);
+				   new Outcome(result.list_base, information_nec, information_sel, sum_model);
 				   dispose();
 			    }
 			    if(result.list_base.size()==0) {
@@ -377,7 +384,7 @@ friday.setBackground(Color.WHITE);
 			    }
 			    else {
 			    	if(nec_result.list_base.size()!=0&&nec_result.sub_grade==day_dater.subject_check_num) {
-			    	new Outcome(nec_result.list_base, sel_model, nec_model, sum_model);
+			    	new Outcome(nec_result.list_base, information_nec, information_sel, sum_model);
 			    	  dispose();
 			    	}
 			    if(nec_result.list_base.size()==0&&nec_result.sub_grade!=day_dater.subject_check_num) {

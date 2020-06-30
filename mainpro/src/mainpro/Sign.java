@@ -134,22 +134,20 @@ public class Sign extends JFrame{
 				Connection conn = null;
 		        Statement stmt = null;
 		        try{
-		            Class.forName("com.mysql.jdbc.Driver");
+		            Class.forName("com.mysql.cj.jdbc.Driver");
 
 		            conn = DriverManager.getConnection(Main.url, Main.id, Main.pw);
 
-		            System.out.println("Successfully Connected!");
 
 		            //DB와 연결된 conn 객체로부터 Statement 객체 획득.
 		            stmt = conn.createStatement();
 
 		            //query 만들기
-		            String sql="INSERT INTO `seed`.`user` (`id`, `pass`) VALUES "+"('"+id+"','"+pw+"')";
+		            String sql="INSERT INTO user VALUES "+"('"+id+"','"+pw+"')";
 
 
 		            //query문 날리기
 		            stmt.execute(sql);
-		            System.out.println("Sign Success end");
 		            //회원 가입 완료  시퀸스 입력
 
 		        }catch(ClassNotFoundException e1){
@@ -169,12 +167,12 @@ public class Sign extends JFrame{
 		                e1.printStackTrace();
 		            }
 		        }
-		        System.out.println("ALL end");
+
 		        //결과창 올리기
-				//회원가입완료시 로그인창으로 돌아가기		
+				//회원가입완료시 로그인창으로 돌아가기
 		        if(x==0) {
 		        	new Login();
-		        	JOptionPane.showMessageDialog(null, "회원가입을 완료했습니다.");	
+		        	JOptionPane.showMessageDialog(null, "회원가입을 완료했습니다.");
 		        	dispose();
 		        }
 			}

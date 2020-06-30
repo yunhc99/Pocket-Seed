@@ -3,14 +3,17 @@ package mainpro;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -35,6 +38,8 @@ public class SubList extends JFrame{
 	int Next_button_High = 30;
 
 	//
+	ArrayList<Sub_dater> backup;
+	DB sub_db = new DB();
 
 	private Image screenImage;// 이미지를 담는거
 	private Graphics screenGraphic;
@@ -48,10 +53,18 @@ public class SubList extends JFrame{
 	private ImageIcon DeleteButtonEnterImage = new ImageIcon(Main.class.getResource("../image/SubListDeleteButtonEnter.png"));
 	private ImageIcon NextButtonImage = new ImageIcon(Main.class.getResource("../image/SubListNextButton.png"));
 	private ImageIcon NextButtonEnterImage = new ImageIcon(Main.class.getResource("../image/SubListNextButtonEnter.png"));
-
+	private ImageIcon SearchImage = new ImageIcon(Main.class.getResource("../image/SubListSearchButton.png"));
+	private ImageIcon ResetImage = new ImageIcon(Main.class.getResource("../image/SubListResetButton.png"));
 
 	// 이미지 크기 변환
 
+	Image Search = SearchImage.getImage();
+	Image searchImgA = Search.getScaledInstance(70, 35, Image.SCALE_SMOOTH);
+	ImageIcon SEARCH_ButtonImage = new ImageIcon(searchImgA);
+
+	Image Reset = ResetImage.getImage();
+	Image resetImg = Reset.getScaledInstance(83, 35, Image.SCALE_SMOOTH);
+	ImageIcon RESET_ButtonImage = new ImageIcon(resetImg);
 
 	Image ADD = AddButtonImage.getImage();
 	Image changeImgA = ADD.getScaledInstance(P_D_button_Weight, P_D_button_High, Image.SCALE_SMOOTH);
@@ -80,27 +93,20 @@ public class SubList extends JFrame{
 	private JButton AddButton= new JButton(ADD_ButtonImage);
 	private JButton DeleteButton= new JButton(DELETE_ButtonImage);
 	private JButton NextButton= new JButton(NEXT_ButtonImage);
+	private JButton SearchButton= new JButton(SEARCH_ButtonImage);
+	private JButton ResetButton= new JButton(RESET_ButtonImage);
 	//
+	JLabel sub_name = new JLabel("과목명");
+	JTextField subject = new JTextField(10){
+		public void setBorder(Border border) { // 테두리 투명화
 
-	// 요일
-	String[] day = {" ", "월", "화", "수", "목", "금"};
-	String[] date = {" ", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-	JComboBox day1 = new JComboBox(day); //요일1
-	JComboBox date1 = new JComboBox(date); //1의 시간
-	JComboBox date2 = new JComboBox(date); //1의 시간
-	JComboBox date3 = new JComboBox(date); //1의 시간
-	JComboBox day2 = new JComboBox(day); //요일2
-	JComboBox date2_1 = new JComboBox(date); //2의 시간
-	JComboBox date2_2 = new JComboBox(date); //2의 시간
-	JComboBox date2_3 = new JComboBox(date); //2의 시간
-	JTextField subject = new JTextField(10); //과목명
-	JTextField subject_number = new JTextField(10); //과목 학점
-	JTextField human_number = new JTextField(10); //과목 인원
-	//
+		}
+	}; //과목명
+
 
 	private Font fon1 = new Font("굴림", Font.PLAIN, 20);
 	private Font fon2 = new Font("굴림", Font.PLAIN, 30);
-
+	private Font fon3 = new Font("굴림", Font.PLAIN, 15);
 	private int mouseX, mouseY;
 
 	DefaultListModel model_l;
@@ -110,6 +116,8 @@ public class SubList extends JFrame{
 
 	}
     };
+
+
 	// 목록 보여주는 창
 	DefaultListModel model;
     JList list = new JList(new DefaultListModel());
@@ -119,6 +127,7 @@ public class SubList extends JFrame{
 	}
 };
 	//
+
 
 	public SubList() {
 		setUndecorated(true);// 실행시 메뉴바 안보이기
@@ -130,6 +139,11 @@ public class SubList extends JFrame{
 		setVisible(true);
 		setBackground(new Color(0, 0, 0, 0)); // 컴포넌트의 배경이 하얀색
 		setLayout(null);
+
+        Dimension frameSize = getSize();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        setLocation((screenSize.width - frameSize.width)/2,(screenSize.height - frameSize.height)/2);
 
 		meunBar.setBounds(0, 0, 600, 30);
 		meunBar.addMouseListener(new MouseAdapter() {
@@ -150,8 +164,51 @@ public class SubList extends JFrame{
 		});
 		add(meunBar);
 
+
+		SearchButton.setBounds(385, 455, 70, 35);
+		SearchButton.setBorderPainted(false);
+		SearchButton.setContentAreaFilled(false);
+		SearchButton.setFocusPainted(false);
+		SearchButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				SearchButton.setIcon(SEARCH_ButtonImage);
+				SearchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
+			}
+			@Override
+			public void mouseExited(MouseEvent e){
+				SearchButton.setIcon(SEARCH_ButtonImage);
+				SearchButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
+			}
+		});
+		add(SearchButton);
+		SearchButton.addActionListener(new action());
+		//
+
+		ResetButton.setBounds(470, 453, 83, 35);
+		ResetButton.setBorderPainted(false);
+		ResetButton.setContentAreaFilled(false);
+		ResetButton.setFocusPainted(false);
+		ResetButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				ResetButton.setIcon(RESET_ButtonImage);
+				ResetButton.setCursor(new Cursor(Cursor.HAND_CURSOR));//손가락 커서
+			}
+			@Override
+			public void mouseExited(MouseEvent e){
+				ResetButton.setIcon(RESET_ButtonImage);
+				ResetButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
+			}
+		});
+		add(ResetButton);
+		ResetButton.addActionListener(new action());
+		//
+
+
+
 		// 추가 버튼 관리
-		AddButton.setBounds(470, 290, P_D_button_Weight, P_D_button_High);
+		AddButton.setBounds(470, 365, P_D_button_Weight, P_D_button_High);
 		AddButton.setBorderPainted(false);
 		AddButton.setContentAreaFilled(false);
 		AddButton.setFocusPainted(false);
@@ -178,46 +235,31 @@ public class SubList extends JFrame{
 		// 목록
 		add(scroll);
 		model = (DefaultListModel)list.getModel();
-		list.setFont(fon1);
-		scroll.setBounds(60,540,505,188);
+		list.setFont(fon3);
+		scroll.setBounds(60,598,505,130);
 		//
 
 
 		add(scroll_l);
 		model_l = (DefaultListModel)list_l.getModel();
-		list_l.setFont(fon1);
-		scroll_l.setBounds(60,178,505,84);
+		list_l.setFont(fon3);
+		scroll_l.setBounds(60,174,505,176);
 
 
+
+		for(int i=0; i<sub_db.Result_list.size() ; i++) {
+		model_l.addElement(sub_db.Result_list.get(i));
+		}
+
+
+		add(subject);
+		subject.setBounds(150,455,185,36);
+		subject.setFont(fon3);
 		// 과목 입력
 
-		add(day1);
-		add(day2);
-		add(date1);
-		add(date2);
-		add(date3);
-		add(date2_1);
-		add(date2_2);
-		add(date2_3);
-		add(subject);
-		add(subject_number);
-		add(human_number);
-
-		subject.setBounds(60,360,140,25);
-		subject_number.setBounds(60,395,50,25);
-		human_number.setBounds(140,395,50,25);
-		day1.setBounds(230,360,45,25);
-		date1.setBounds(280,360,45,25);
-		date2.setBounds(330,360,45,25);
-		date3.setBounds(380,360,45,25);
-		day2.setBounds(230,395,45,25);
-		date2_1.setBounds(280,395,45,25);
-		date2_2.setBounds(330,395,45,25);
-		date2_3.setBounds(380,395,45,25);
-		//
 
 		// 삭제 버튼 관리
-		DeleteButton.setBounds(470, 750, P_D_button_Weight, P_D_button_High);
+		DeleteButton.setBounds(470, 747, P_D_button_Weight, P_D_button_High);
 		DeleteButton.setBorderPainted(false);
 		DeleteButton.setContentAreaFilled(false);
 		DeleteButton.setFocusPainted(false);
@@ -240,7 +282,7 @@ public class SubList extends JFrame{
 		add(DeleteButton);
 		DeleteButton.addActionListener(new action());
 		//
-		
+
 		// 다음 버튼 관리
 		NextButton.setBounds(430, 820, Next_button_Weight, Next_button_High);
 		NextButton.setBorderPainted(false);
@@ -276,66 +318,7 @@ public class SubList extends JFrame{
 
 	if(e.getSource()==AddButton) { // 추가 버튼 처리 이벤트
 
-		String a,b,c,d,r,result,b2,c2,d2,r2;
-		String s_num, h_num;
-		s_num=subject_number.getText();
-		h_num=human_number.getText();
-		a=subject.getText();
-		b=day1.getSelectedItem().toString();
-		c=date1.getSelectedItem().toString();
-		d=date2.getSelectedItem().toString();
-		r=date3.getSelectedItem().toString();
-		b2=day2.getSelectedItem().toString();
-		c2=date2_1.getSelectedItem().toString();
-		d2=date2_2.getSelectedItem().toString();
-		r2=date2_3.getSelectedItem().toString();
-
-	if(!(c==" ")&&!(d==" ")&&!(r==" ")&&(c2==" ")&&(d2==" ")&&(r2==" ")) { // 첫째 과목 셋, 둘째 영
-		model.addElement(a+ "  " + b + " " + c + "," + d + ","+ r + "  " + "학점: " + s_num + "  인원: " + h_num);
-		subject.setText("");
-		subject_number.setText("");
-		human_number.setText("");
-	}
-	else if(!(c==" ")&&!(d==" ")&&(r==" ")&&(c2==" ")&&(d2==" ")&&(r2==" ")) { // 첫째 과목 둘, 둘째 영
-		model.addElement(a+ "  " + b + " " + c + ","+ d  + "  " + "학점: " + s_num + "  인원: " + h_num);
-		subject.setText("");
-		subject_number.setText("");
-		human_number.setText("");
-	}
-	else if(!(c==" ")&&(d==" ")&&(r==" ")&&(c2==" ")&&(d2==" ")&&(r2==" ")) { // 첫째 과목 하나, 둘째 영
-		model.addElement(a+ "  " + b + " " + c + "  " + "학점: " + s_num + "  인원: " + h_num);
-		subject.setText("");
-		subject_number.setText("");
-		human_number.setText("");
-	}
-	else if(!(c==" ")&&(d==" ")&&(r==" ")&&!(c2==" ")&&(d2==" ")&&(r2==" ")) { // 첫째 과목 하나, 둘째 하나만
-		model.addElement(a+ "  " + b + " " + c +" / "+ b2 + " " + c2 + "  " + "학점: " + s_num + "  인원: " + h_num);
-		subject.setText("");
-		subject_number.setText("");
-		human_number.setText("");
-	}
-	else if(!(c==" ")&&(d==" ")&&(r==" ")&&!(c2==" ")&&!(d2==" ")&&(r2==" ")) { // 첫째 과목 하나, 둘째 두개
-		model.addElement(a+ "  " + b + " " + c +" / "+ b2 + " " + c2 + "," + d2 + "  " + "학점: " + s_num + "  인원: " + h_num);
-		subject.setText("");
-		subject_number.setText("");
-		human_number.setText("");
-	}
-	else if(!(c==" ")&&!(d==" ")&&(r==" ")&&!(c2==" ")&&(d2==" ")&&(r2==" ")) { // 첫째 과목 둘, 둘째 하나만
-		model.addElement(a+ "  " + b + " " + c + "," + d + " / "+ b2 + " " + c2 + "  " + "학점: " + s_num + "  인원: " + h_num);
-		subject.setText("");
-		subject_number.setText("");
-		human_number.setText("");
-	}
-	else if(!(c==" ")&&!(d==" ")&&(r==" ")&&!(c2==" ")&&!(d2==" ")&&(r2==" ")) { // 첫째 과목 둘, 둘째 두개
-		model.addElement(a+ "  " + b + " " + c + "," + d + " / "+ b2 + " " + c2 + "," + d2 + "  " + "학점: " + s_num + "  인원: " + h_num);
-		subject.setText("");
-		subject_number.setText("");
-		human_number.setText("");
-	}
-	else {
-		System.out.println("잘못입력함");
-	}
-
+		model.addElement(list_l.getSelectedValue());
 
 	}
 	//
@@ -348,6 +331,32 @@ public class SubList extends JFrame{
 		new ConditionIN(model);
 		dispose();
 	}
+
+
+	else if(e.getSource()==SearchButton) {
+		String text;
+		text = subject.getText();
+
+		if(!text.equals("")) {
+		model_l.removeAllElements();
+
+		for(int i=0; i<sub_db.Result_list.size() ; i++) {
+			if(text.equals(sub_db.Name.get(i))) {
+		model_l.addElement(sub_db.Result_list.get(i));
+			}
+		}
+		}
+
+		subject.setText("");
+	}
+
+	else if(e.getSource()==ResetButton) {
+		model_l.removeAllElements();
+		for(int i=0; i<sub_db.Result_list.size() ; i++) {
+		model_l.addElement(sub_db.Result_list.get(i));
+		}
+	}
+
 		//
 		}
 	}

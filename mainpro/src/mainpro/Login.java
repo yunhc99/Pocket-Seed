@@ -130,17 +130,16 @@ public class Login extends JFrame{
 				Connection conn = null;
 		        Statement stmt = null;
 		        try{
-		            Class.forName("com.mysql.jdbc.Driver");
-		 
+		            Class.forName("com.mysql.cj.jdbc.Driver");
+
 		            conn = DriverManager.getConnection(Main.url, Main.id, Main.pw);
-		 
-		            System.out.println("Successfully Connected!");
-		 
+
+
 		            //DB와 연결된 conn 객체로부터 Statement 객체 획득.
 		            stmt = conn.createStatement();
-		 
-		            //query 만들기		            		          
-		            String Seach= "SELECT * FROM user WHERE id LIKE '"+id+"'";		            
+
+		            //query 만들기
+		            String Seach= "SELECT * FROM user WHERE id LIKE '"+id+"'";
 		            ResultSet result = stmt.executeQuery(Seach);
 		           if(result.next()) {
 		        	   if(pw.equals(result.getString("pass"))) {
@@ -148,18 +147,18 @@ public class Login extends JFrame{
 		        		   JOptionPane.showMessageDialog(null, "로그인 성공!");
 		        		   new SubList();
 		        		   dispose();
-		        	   }else {        		   
+		        	   }else {
 		        		   System.out.println("pass fail");
 		        		   JOptionPane.showMessageDialog(null, "패스워드가 틀렸습니다. 다시 입력해주세요");
-		        	   }        	   
-		           }else {        	   
+		        	   }
+		           }else {
 		        	   System.out.println("id fail");
 		        	   JOptionPane.showMessageDialog(null, "아이디가 틀렸습니다. 다시 입력해주세요");
-		           }                               
-		            //query문 날리기            
+		           }
+		            //query문 날리기
 		            System.out.println("Success end");
 		        }
-		 
+
 		        catch(ClassNotFoundException e1){
 		            e1.printStackTrace();
 		        }

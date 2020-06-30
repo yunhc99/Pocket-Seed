@@ -7,25 +7,29 @@ public class Combination {
 	 private ArrayList<Sub_dater> arr = new ArrayList<>();     //기준 배열
 	    private Stack<Sub_dater> st; //조합을 저장할 스택
 	    ArrayList<ArrayList<Sub_dater>> list = new ArrayList<>();
-	    ArrayList<Sub_dater> sublist; 
+	    ArrayList<Sub_dater> sublist;
+
+
 	    public Combination(ArrayList<Sub_dater> arr){
 	        this.arr = arr;             //배열을 받아 객체에 저장한다.
-	        st = new Stack<Sub_dater>(); //스택에 메모리를 할당한다.   
+	        st = new Stack<Sub_dater>(); //스택에 메모리를 할당한다.
 	    }
+
+
 	    public void showStack(){
 	        //스택에 있는 값들을 출력한다.
 	    	sublist = new ArrayList<>();
 	        for(int i=0;i<st.size();i++){
 	        	Sub_dater ir = new Sub_dater();
 	        	ir = st.get(i);
-	        	
+
 	        	sublist.add(st.get(i));
 	            //System.out.print(ir.subject_name+" ");
 	        }
 	        list.add(sublist);
 	        //System.out.println("");
 	    }
-	     
+
 	    public void doCombination(int n, int r, int index){
 	        // n : 전체 개수
 	        // r : 뽑을 개수
@@ -43,16 +47,16 @@ public class Combination {
 	        }
 	        else{
 	            //저 두가지 예외 사항을 빼면 점화식대로 진행하면 된다.
-	             
+
 	            //index를 포함하는 경우
 	            st.add(arr.get(index));
 	            doCombination(n-1,r-1,index+1); //index를 스택에 넣은상태로 index를 1옮겨 그대로 진행.
-	             
+
 	            //index를 포함하지 않는 경우
 	            st.pop(); //index를 제거해주고
 	            doCombination(n-1, r, index+1); //index를 제외한 상태에서 n-1Cr 진행.
-	             
-	             
+
+
 	        }
 	    }
 }
