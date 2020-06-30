@@ -283,8 +283,35 @@ if(list_base_base.get(0).get(u).Day_Second.equals("금")){
 				SaveButton.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));//기본 커서
 			}
 			@Override
-			public void mousePressed(MouseEvent e){
-				System.out.print("저장 기능\n");
+			public void mousePressed(MouseEvent e){				
+		        String saveFileExtension = "png";		       		       
+		        
+		        Dimension frameSize = getSize();
+		        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();		        
+		        
+		        try {
+		        	setLocation((screenSize.width - frameSize.width)/2,(screenSize.height - frameSize.height)/2);
+		            Robot robot = new Robot();
+		            //Rectangle rectangle = new Rectangle(500, 500, Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);		            
+		            Rectangle rectangle = new Rectangle((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2,
+		            		Main.SCREEN_WIDTH,Main.SCREEN_HEIGHT);
+		            BufferedImage image = robot.createScreenCapture(rectangle);
+		            image.setRGB(0,0,100);
+		            		            		          
+		            JFileChooser fileChooser = new JFileChooser();
+		            fileChooser.setFileFilter(new FileNameExtensionFilter("*.png", "png"));
+		            if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+		                File file = fileChooser.getSelectedFile();		               
+		                ImageIO.write(image, saveFileExtension, new File(file.getAbsolutePath()+"."+saveFileExtension));
+		                JOptionPane.showMessageDialog(null, "이미지 저장 완료");
+		            } else {
+		                System.out.println("No file choosen!");
+		            }		        		            		            		            		            		            
+		            
+		        }catch (Exception e1){
+		            e1.printStackTrace();
+		        }		            			   		         		        		        
+				System.out.print("저장 기능 완료\n");
 			}
 		});
 		add(SaveButton);
